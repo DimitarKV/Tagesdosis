@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server
+    restart: always
+    environment:
+      SA_PASSWORD: Tagesdosis123
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
