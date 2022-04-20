@@ -42,4 +42,24 @@ public class TokenController : ControllerBase
 
         return Unauthorized();
     }
+
+    [HttpPost]
+    public async Task<IActionResult> RegisterAsync([FromBody] UserCredentialsDTO credentialsDto)
+    {
+        var issuer = _configuration["Jwt:Issuer"];
+        var audience = _configuration["Jwt:Audience"];
+        var securityKey = new SymmetricSecurityKey
+            (Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+        var credentials = new SigningCredentials(securityKey, 
+            SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(issuer: issuer,
+            audience: audience,
+            signingCredentials: credentials);
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var stringToken = tokenHandler.WriteToken(token);
+
+        return Ok(stringToken);
+    }
 }
