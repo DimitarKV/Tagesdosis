@@ -6,9 +6,9 @@ Tagesdosis is a modern web application, following the microservice pattern.
 
 ## Authors
 
+- [Stanimir Kolev](https://www.github.com/r46narok)
 - [Dimitar Vasilev](https://www.github.com/batmitio)
 - [Dimitar Matanski](https://www.github.com/dimitarmatanski)
-- [Stanimir Kolev](https://www.github.com/r46narok)
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
