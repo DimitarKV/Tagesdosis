@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Tagesdosis.Services.User.Grpc": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5165;https://localhost:7165",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
