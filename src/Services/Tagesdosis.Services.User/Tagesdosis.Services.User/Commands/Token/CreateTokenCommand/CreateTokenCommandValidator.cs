@@ -10,8 +10,8 @@ public class CreateTokenCommandValidator : AbstractValidator<CreateTokenCommand>
     {
         RuleFor(x => new {x.UserName, x.Password})
             .MustAsync(async (pair, _) =>
-                await userManager.CheckPasswordAsync(new AppUser { UserName = pair.UserName}, pair.Password))
+                await userManager.CheckPasswordAsync(await userManager.FindByNameAsync(pair.UserName), pair.Password))
             .WithErrorCode("401")
-            .WithMessage("User with the given UserName does not exist in the database.");
+            .WithMessage("Wrong password");
     }
 }
