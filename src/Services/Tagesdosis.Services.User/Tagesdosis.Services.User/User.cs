@@ -4,5 +4,4 @@ namespace Tagesdosis.Domain.Entities;
 
 public class User : IdentityUser
 {
-    
 }
