@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -36,13 +37,17 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Api
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var credentials = new SigningCredentials(securityKey, 
             SecurityAlgorithms.HmacSha256);
-
+        
+        var user = await _userManager.FindByNameAsync(request.UserName);
+        var claims = await _userManager.GetClaimsAsync(user);
+        claims.Add(new Claim(ClaimTypes.Name, request.UserName));
+        
         var token = new JwtSecurityToken(issuer: issuer,
             audience: audience,
             signingCredentials: credentials,
-            expires: DateTime.UtcNow.AddMinutes(ExpirationInMinutes));
+            expires: DateTime.UtcNow.AddMinutes(ExpirationInMinutes),
+            claims: claims);
 
-        var user = await _userManager.FindByNameAsync(request.UserName);
         token.Payload[UserIdPayloadProperty] = user.Id;
             
         var tokenHandler = new JwtSecurityTokenHandler();

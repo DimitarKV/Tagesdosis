@@ -10,9 +10,6 @@ public static class SecurityExtensions
 {
     public static IServiceCollection AddSecurity(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddAuthentication();
-        services.AddAuthorization();
-
         services.AddAuthentication(o =>
         {
             o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -31,8 +28,14 @@ public static class SecurityExtensions
                 IssuerSigningKey = new SymmetricSecurityKey
                     (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
             };
+            
         });
 
+        services.AddAuthorization(opt =>
+        {
+            opt.AddPolicy("AdminOnly", policy => policy.RequireClaim("User"));
+        });
+        
         return services;
     }
 }
