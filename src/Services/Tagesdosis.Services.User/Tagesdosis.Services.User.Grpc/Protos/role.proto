@@ -5,12 +5,12 @@ option csharp_namespace = "Tagesdosis.Services.User.Grpc";
 package role;
 
 service RoleService {
-  rpc GetRolesForUser (GetRoleMessage) returns (RolesMessage);
+  rpc GetRolesForUser (GetRolesForUserRequest) returns (GetRolesForUserReply);
 }
 
-message GetRoleMessage {
+message GetRolesForUserRequest {
 }
 
-message RolesMessage {
+message GetRolesForUserReply {
   repeated string roles = 1;
 }

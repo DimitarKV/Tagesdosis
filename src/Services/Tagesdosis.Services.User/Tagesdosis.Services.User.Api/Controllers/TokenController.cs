@@ -2,10 +2,7 @@
 using System.Text;
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
 using Tagesdosis.Services.User.DTOs;
 
