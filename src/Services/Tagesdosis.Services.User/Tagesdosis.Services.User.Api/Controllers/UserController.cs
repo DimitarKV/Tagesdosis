@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
+using Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
 using Tagesdosis.Services.User.Data.Persistence;
 using Tagesdosis.Services.User.DTOs;
 
@@ -42,5 +43,16 @@ public class UserController : ControllerBase
     public IActionResult GetAllUsersAsync()
     {
         return Ok(_dbContext.Users!.ToList());
+    }
+
+    [HttpPut]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand updateUserCommand)
+    {
+        var response = await _mediator.Send(updateUserCommand);
+
+        if (response.IsValid)
+            return Ok(response);
+        return BadRequest(response);
     }
 }

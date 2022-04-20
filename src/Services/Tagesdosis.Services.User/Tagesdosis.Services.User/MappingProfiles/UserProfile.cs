@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
+using Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.DTOs;
 
@@ -12,6 +13,7 @@ public class UserProfile : Profile
         CreateMap<UserCredentialsDTO, AppUser>();
         
         CreateMap<CreateUserCommand, AppUser>();
+        CreateMap<UpdateUserCommand, AppUser>();
         CreateMap<UserCredentialsDTO, CreateUserCommand>();
     }
 }

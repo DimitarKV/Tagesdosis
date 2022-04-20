@@ -747,6 +747,7 @@
           "FluentValidation.DependencyInjectionExtensions": "10.4.0",
           "MediatR": "10.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "10.0.1",
+          "Microsoft.Extensions.Logging": "6.0.0",
           "Tagesdosis.Domain": "1.0.0"
         },
         "runtime": {
