@@ -6,6 +6,10 @@ namespace Tagesdosis.Services.User.Queries.User.GetUserQuery;
 
 public class GetUserQueryValidator : AbstractValidator<GetUserQuery>
 {
+    /// <summary>
+    /// Validator that checks whether the user exists in the database
+    /// </summary>
+    /// <param name="userManager"></param>
     public GetUserQueryValidator(UserManager<AppUser> userManager)
     {
         RuleFor(query => query.UserName)

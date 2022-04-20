@@ -25,7 +25,7 @@ public class UserController : ControllerBase
         _mediator = mediator;
         _dbContext = dbContext;
     }
-
+    
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

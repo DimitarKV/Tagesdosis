@@ -12,6 +12,7 @@ public class GetUserQuery : IRequest<ApiResponse<UserDTO>>
     public string UserName { get; set; }
 }
 
+
 public class GetUserQueryHandler : IRequestHandler<GetUserQuery, ApiResponse<UserDTO>>
 {
     private readonly UserManager<AppUser> _userManager;
@@ -23,6 +24,12 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, ApiResponse<Use
         _mapper = mapper;
     }
     
+    /// <summary>
+    /// Retrieves user from db by username
+    /// </summary>
+    /// <param name="request">Contains the username of the user</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse<UserDTO>> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);
