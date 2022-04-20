@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Tagesdosis.Services.User.Data.Entities;
 
 namespace Tagesdosis.Services.User.Data.Persistence;
 
-public class UserDbContext : DbContext
+public class UserDbContext : IdentityDbContext<AppUser>
 {
-    public DbSet<AppUser>? AppUsers { get; set; }
-    
     public UserDbContext()
     {
         

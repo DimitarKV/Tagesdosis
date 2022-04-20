@@ -38,9 +38,9 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public IActionResult GetAllUsersAsync()
     {
-        return Ok(_dbContext.AppUsers!.ToList());
+        return Ok(_dbContext.Users!.ToList());
     }
 }

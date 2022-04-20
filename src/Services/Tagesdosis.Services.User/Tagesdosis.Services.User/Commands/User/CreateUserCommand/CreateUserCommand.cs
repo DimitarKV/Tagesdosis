@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
+using Tagesdosis.Services.User.Authorization;
 using Tagesdosis.Services.User.Data.Entities;
 
 namespace Tagesdosis.Services.User.Commands.User.CreateUserCommand;
@@ -33,6 +35,8 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
         
         var result = await _userManager.CreateAsync(user, request.Password);
 
+        await _userManager.AddClaimAsync(user, Claims.User);
+        
         if (result.Succeeded)
             return new ApiResponse("Successfully created a user");
 

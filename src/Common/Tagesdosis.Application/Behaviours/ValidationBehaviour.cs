@@ -33,7 +33,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
                 var resultType = responseType.GetGenericArguments()[0];
                 var invalidResponseType = typeof(ApiResponse<>).MakeGenericType(resultType);
  
-                var invalidResponse = Activator.CreateInstance(invalidResponseType, null, failures.Select(s => s.ErrorMessage).ToList()) as TResponse;
+                var invalidResponse = Activator.CreateInstance(invalidResponseType, null, "Invalid", failures.Select(s => s.ErrorMessage).ToList()) as TResponse;
  
                 return invalidResponse!;
             }
