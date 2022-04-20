@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Tagesdosis.Services.User.Grpc";
+
+package role;
+
+service RoleService {
+  rpc GetRolesForUser (GetRoleMessage) returns (RolesMessage);
+}
+
+message GetRoleMessage {
+}
+
+message RolesMessage {
+  repeated string roles = 1;
+}
