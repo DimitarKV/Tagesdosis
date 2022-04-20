@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
-using Tagesdosis.Services.User.Authorization;
 using Tagesdosis.Services.User.Data.Entities;
 
 namespace Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
@@ -11,6 +10,7 @@ public class UpdateUserCommand : IRequest<ApiResponse>
 {
     public string Id { get; set; }
     public string UserName { get; set; }
+    public string NewUserName { get; set; }
     public string Email { get; set; }
     public string CurrentPassword { get; set; }
     public string NewPassword { get; set; }
@@ -29,10 +29,10 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
 
     public async Task<ApiResponse> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByIdAsync(request.Id);
+        var user = await _userManager.FindByNameAsync(request.UserName);
             bool updated = false;
         if (user is null)
-            return new ApiResponse("Didn't find user with id " + request.Id);
+            return new ApiResponse("Didn't find user with username " + request.UserName);
         if (request.UserName != "")
         {
             user.UserName = request.UserName;

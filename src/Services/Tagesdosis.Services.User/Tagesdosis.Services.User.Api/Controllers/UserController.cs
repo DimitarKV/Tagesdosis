@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
+using Tagesdosis.Services.User.Commands.User.DeleteUserCommand;
 using Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
 using Tagesdosis.Services.User.Data.Persistence;
 using Tagesdosis.Services.User.DTOs;
@@ -49,7 +50,22 @@ public class UserController : ControllerBase
     [Authorize(AuthenticationSchemes = "Bearer")]
     public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand updateUserCommand)
     {
+        updateUserCommand.UserName = User.Identity.Name;
         var response = await _mediator.Send(updateUserCommand);
+
+        if (response.IsValid)
+            return Ok(response);
+        return BadRequest(response);
+    }
+
+    [HttpDelete]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public async Task<IActionResult> DeleteUser()
+    {
+        var command = new DeleteUserCommand();
+        command.UserName = User.Identity.Name;
+        
+        var response = await _mediator.Send(command);
 
         if (response.IsValid)
             return Ok(response);
