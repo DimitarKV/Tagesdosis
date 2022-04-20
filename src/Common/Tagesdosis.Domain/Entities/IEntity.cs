@@ -3,6 +3,6 @@
 public interface IEntity<T>
 {
     public T Id { get; set; }
-    public DateTime CreatedDateTime { get; set; }
-    public DateTime UpdatedDateTime { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public DateTime UpdatedOn { get; set; }
 }

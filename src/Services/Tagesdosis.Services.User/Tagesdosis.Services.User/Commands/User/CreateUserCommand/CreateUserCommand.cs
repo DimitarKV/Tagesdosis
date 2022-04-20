@@ -28,8 +28,8 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
     {
         var user = _mapper.Map<AppUser>(request);
         
-        user.CreatedDateTime = DateTime.Now;
-        user.UpdatedDateTime = DateTime.Now;
+        user.CreatedOn = DateTime.Now;
+        user.UpdatedOn = DateTime.Now;
         
         var result = await _userManager.CreateAsync(user, request.Password);
 

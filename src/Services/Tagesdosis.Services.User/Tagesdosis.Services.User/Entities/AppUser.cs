@@ -5,6 +5,6 @@ namespace Tagesdosis.Services.User.Entities;
 
 public class AppUser : IdentityUser, IEntity<string>
 {
-    public DateTime CreatedDateTime { get; set; }
-    public DateTime UpdatedDateTime { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public DateTime UpdatedOn { get; set; }
 }
