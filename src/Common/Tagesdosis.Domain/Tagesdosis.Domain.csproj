@@ -6,9 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Infrastructure" />
-      <Folder Include="Types" />
-    </ItemGroup>
-
 </Project>

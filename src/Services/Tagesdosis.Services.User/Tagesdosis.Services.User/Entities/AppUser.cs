@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Tagesdosis.Domain.Entities;
 
-namespace Tagesdosis.Services.User;
+namespace Tagesdosis.Services.User.Entities;
 
-public class AppUser : IdentityUser
+public class AppUser : IdentityUser, IEntity<string>
 {
+    public DateTime CreatedDateTime { get; set; }
+    public DateTime UpdatedDateTime { get; set; }
 }
