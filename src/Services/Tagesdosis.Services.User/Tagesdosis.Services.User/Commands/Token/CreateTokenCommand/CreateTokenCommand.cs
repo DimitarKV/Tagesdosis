@@ -30,6 +30,12 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Api
         _userManager = userManager;
     }
     
+    /// <summary>
+    /// Creates token after login operation
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse<string>> Handle(CreateTokenCommand request, CancellationToken cancellationToken)
     {
         var issuer = _configuration["Jwt:Issuer"];

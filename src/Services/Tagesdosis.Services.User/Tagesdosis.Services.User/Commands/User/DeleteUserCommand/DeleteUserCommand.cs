@@ -20,6 +20,12 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ApiRe
         _userManager = userManager;
     }
 
+    /// <summary>
+    /// Deletes the user with the given UserName
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
         AppUser user = await _userManager.FindByNameAsync(request.UserName);

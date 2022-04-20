@@ -26,6 +26,12 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
         _userManager = userManager;
     }
 
+    /// <summary>
+    /// Updates the fields of the user which are not empty strings
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);

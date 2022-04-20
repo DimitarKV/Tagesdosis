@@ -26,6 +26,12 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
         _userManager = userManager;
     }
     
+    /// <summary>
+    /// Creates user with the given credentials 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var user = _mapper.Map<AppUser>(request);
