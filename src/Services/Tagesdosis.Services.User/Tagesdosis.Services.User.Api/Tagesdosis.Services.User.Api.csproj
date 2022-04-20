@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Tagesdosis.Application\Tagesdosis.Application.csproj" />
       <ProjectReference Include="..\Tagesdosis.Services.User\Tagesdosis.Services.User.csproj" />
     </ItemGroup>
 

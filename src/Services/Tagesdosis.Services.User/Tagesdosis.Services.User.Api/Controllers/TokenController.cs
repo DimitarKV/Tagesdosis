@@ -1,10 +1,14 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
 using Tagesdosis.Services.User.DTOs;
+using Tagesdosis.Services.User.Entities;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
 
@@ -12,39 +16,26 @@ namespace Tagesdosis.Services.User.Api.Controllers;
 [Route("/api/[controller]")]
 public class TokenController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
+    private readonly IMediator _mediator;
 
-    public TokenController(IConfiguration configuration, IMapper mapper)
+    public TokenController(IMapper mapper, IMediator mediator)
     {
-        _configuration = configuration;
         _mapper = mapper;
+        _mediator = mediator;
     }
     
     [HttpPost]
-    public IActionResult GetToken([FromBody] UserCredentialsDTO credentialsDto)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> GetToken([FromBody] UserCredentialsDTO credentialsDto)
     {
-        if (credentialsDto.UserName=="user1" && credentialsDto.Password=="password1")
-        {
-            var issuer = _configuration["Jwt:Issuer"];
-            var audience = _configuration["Jwt:Audience"];
-            var securityKey = new SymmetricSecurityKey
-                (Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, 
-                SecurityAlgorithms.HmacSha256);
+        var command = _mapper.Map<CreateTokenCommand>(credentialsDto);
+        var response = await _mediator.Send(command);
 
-            var token = new JwtSecurityToken(issuer: issuer,
-                audience: audience,
-                signingCredentials: credentials);
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var stringToken = tokenHandler.WriteToken(token);
-
-            return Ok(stringToken);
-        }
-
-        return Unauthorized();
+        if (response.IsValid)
+            return Ok(response);
+        
+        return Unauthorized(response);
     }
-
-    
 }
