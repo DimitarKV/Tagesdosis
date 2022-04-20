@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tagesdosis.Application;
-using Tagesdosis.Services.User.Entities;
-using Tagesdosis.Services.User.Persistence;
+using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Data.Persistence;
 using Tagesdosis.Services.User.Security;
 
 var builder = WebApplication.CreateBuilder(args);

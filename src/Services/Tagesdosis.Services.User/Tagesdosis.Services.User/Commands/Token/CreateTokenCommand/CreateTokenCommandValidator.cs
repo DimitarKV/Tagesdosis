@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Identity;
-using Tagesdosis.Services.User.Entities;
+using Tagesdosis.Services.User.Data.Entities;
 
 namespace Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
 

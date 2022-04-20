@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Tagesdosis.Domain.Types;
-using Tagesdosis.Services.User.Entities;
+using Tagesdosis.Services.User.Data.Entities;
 
 namespace Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
 
@@ -48,6 +48,6 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Api
         var tokenHandler = new JwtSecurityTokenHandler();
         var stringToken = tokenHandler.WriteToken(token);
 
-        return new ApiResponse<string>(stringToken);
+        return new ApiResponse<string>(stringToken, "Successfully created a token");
     }
 }

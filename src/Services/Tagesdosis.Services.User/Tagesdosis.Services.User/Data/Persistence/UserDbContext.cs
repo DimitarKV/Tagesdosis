@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tagesdosis.Services.User.Entities;
+using Tagesdosis.Services.User.Data.Entities;
 
-namespace Tagesdosis.Services.User.Persistence;
+namespace Tagesdosis.Services.User.Data.Persistence;
 
 public class UserDbContext : DbContext
 {

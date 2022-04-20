@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
 using Tagesdosis.Services.User.DTOs;
-using Tagesdosis.Services.User.Entities;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
 

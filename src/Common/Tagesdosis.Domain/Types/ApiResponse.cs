@@ -3,9 +3,11 @@
 public class ApiResponse
 {
     public List<string>? Errors { get; init; }
-
-    public ApiResponse(IEnumerable<string>? errors = null)
+    public string Message { get; set; }
+    
+    public ApiResponse(string message, IEnumerable<string>? errors = null)
     {
+        Message = message;
         Errors = errors?.ToList();
     }
 
@@ -16,8 +18,8 @@ public class ApiResponse<TModel> : ApiResponse
 {
     public TModel Result { get; init; }
     
-    public ApiResponse(TModel model, IEnumerable<string>? errors = null) 
-        : base(errors)
+    public ApiResponse(TModel model, string message = "", IEnumerable<string>? errors = null) 
+        : base(message, errors)
     {
         Result = model;
     }

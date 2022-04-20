@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
+using Tagesdosis.Services.User.Data.Persistence;
 using Tagesdosis.Services.User.DTOs;
-using Tagesdosis.Services.User.Entities;
-using Tagesdosis.Services.User.Persistence;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
 
