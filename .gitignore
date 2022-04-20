@@ -1,5 +1,9 @@
-abin/
-obj/
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
