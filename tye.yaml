@@ -1,0 +1,14 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: tagesdosis
+services:
+- name: tagesdosis-gateways-portal
+  project: src/Gateways/Tagesdosis.Gateways.Portal/Tagesdosis.Gateways.Portal.csproj
+- name: tagesdosis-services-user-api
+  project: src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api/Tagesdosis.Services.User.Api.csproj
+- name: tagesdosis-services-user-grpc
+  project: src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Grpc/Tagesdosis.Services.User.Grpc.csproj
