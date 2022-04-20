@@ -1,10 +1,8 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.User.Commands.Role.AddUserToRoleCommand;
 using Tagesdosis.Services.User.Queries.GetRolesForUserQuery;
-using Tagesdosis.Services.User.Security;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
 
