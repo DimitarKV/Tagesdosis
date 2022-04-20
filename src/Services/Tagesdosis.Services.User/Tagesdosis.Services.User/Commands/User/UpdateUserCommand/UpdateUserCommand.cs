@@ -8,7 +8,6 @@ namespace Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
 
 public class UpdateUserCommand : IRequest<ApiResponse>
 {
-    public string Id { get; set; }
     public string UserName { get; set; }
     public string NewUserName { get; set; }
     public string Email { get; set; }
