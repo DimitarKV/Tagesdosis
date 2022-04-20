@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Tagesdosis.Services.User.Commands.Role.AddUserToRoleCommand;
+using Tagesdosis.Services.User.Commands.Role.AddRoleToUserCommand;
 using Tagesdosis.Services.User.Queries.GetRolesForUserQuery;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
@@ -34,7 +34,7 @@ public class RoleController : ControllerBase
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
     public async Task<IActionResult> AddUserToRoleAsync([FromQuery] string role)
     {
-        var command = new AddUserToRoleCommand
+        var command = new AddRoleToUserCommand()
         {
             UserName = User.Identity!.Name,
             Role = role
