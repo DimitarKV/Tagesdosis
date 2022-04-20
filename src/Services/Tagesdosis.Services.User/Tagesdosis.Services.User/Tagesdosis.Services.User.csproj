@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <Folder Include="Data" />
+      <Folder Include="Queries\Role" />
     </ItemGroup>
 
     <ItemGroup>

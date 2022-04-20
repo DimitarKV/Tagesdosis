@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Identity;
 
 namespace Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
 
@@ -17,13 +18,13 @@ public class UpdateUserCommand : IRequest<ApiResponse>
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiResponse>
 {
-    private IMapper _mapper;
-    private UserManager<AppUser> _userManager;
+    private readonly IMapper _mapper;
+    private readonly IIdentityService _identityService;
 
-    public UpdateUserCommandHandler(IMapper mapper, UserManager<AppUser> userManager)
+    public UpdateUserCommandHandler(IMapper mapper, IIdentityService identityService)
     {
         _mapper = mapper;
-        _userManager = userManager;
+        _identityService = identityService;
     }
 
     /// <summary>
@@ -34,7 +35,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
     /// <returns></returns>
     public async Task<ApiResponse> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByNameAsync(request.UserName);
+        var user = await _identityService.FindByNameAsync(request.UserName);
             bool updated = false;
         if (user is null)
             return new ApiResponse("Didn't find user with username " + request.UserName);
@@ -53,7 +54,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
         IdentityResult result = new IdentityResult();
         if (request.NewPassword != "")
         {
-            result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+            result = await _identityService.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
             if (!result.Succeeded)
                 return new ApiResponse("Couldn't change password of user " + request.UserName);
             updated = true;
@@ -62,7 +63,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
         if (updated)
             user.UpdatedOn = DateTime.Now;
 
-        result = await _userManager.UpdateAsync(user);
+        result = await _identityService.UpdateAsync(user);
         
         if (result.Succeeded)
             return new ApiResponse("Successfully updated user " + request.UserName);

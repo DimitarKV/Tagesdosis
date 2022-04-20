@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.DTOs;
+using Tagesdosis.Services.User.Identity;
 
 namespace Tagesdosis.Services.User.Queries.User.GetUserQuery;
 
@@ -15,12 +16,12 @@ public class GetUserQuery : IRequest<ApiResponse<UserDTO>>
 
 public class GetUserQueryHandler : IRequestHandler<GetUserQuery, ApiResponse<UserDTO>>
 {
-    private readonly UserManager<AppUser> _userManager;
+    private readonly IIdentityService _identityService;
     private readonly IMapper _mapper;
 
-    public GetUserQueryHandler(UserManager<AppUser> userManager, IMapper mapper)
+    public GetUserQueryHandler(IIdentityService identityService, IMapper mapper)
     {
-        _userManager = userManager;
+        _identityService = identityService;
         _mapper = mapper;
     }
     
@@ -32,7 +33,7 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, ApiResponse<Use
     /// <returns></returns>
     public async Task<ApiResponse<UserDTO>> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByNameAsync(request.UserName);
+        var user = await _identityService.FindByNameAsync(request.UserName);
         var dto = _mapper.Map<UserDTO>(user);
 
         return new ApiResponse<UserDTO>(dto, "Retrieved user");

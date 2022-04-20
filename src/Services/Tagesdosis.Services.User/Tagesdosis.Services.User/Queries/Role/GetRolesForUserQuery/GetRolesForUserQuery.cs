@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Identity;
 
 namespace Tagesdosis.Services.User.Queries.GetRolesForUserQuery;
 
@@ -12,11 +13,11 @@ public class GetRolesForUserQuery : IRequest<ApiResponse<List<string>>>
 
 public class GetRolesForUserQueryHandler : IRequestHandler<GetRolesForUserQuery, ApiResponse<List<string>>>
 {
-    private readonly UserManager<AppUser> _userManager;
+    private readonly IIdentityService _identityService;
 
-    public GetRolesForUserQueryHandler(UserManager<AppUser> userManager)
+    public GetRolesForUserQueryHandler(IIdentityService identityService)
     {
-        _userManager = userManager;
+        _identityService = identityService;
     }
     
     /// <summary>
@@ -27,8 +28,8 @@ public class GetRolesForUserQueryHandler : IRequestHandler<GetRolesForUserQuery,
     /// <returns></returns>
     public async Task<ApiResponse<List<string>>> Handle(GetRolesForUserQuery request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByNameAsync(request.UserName);
-        var claims = await _userManager.GetClaimsAsync(user);
+        var user = await _identityService.FindByNameAsync(request.UserName);
+        var claims = await _identityService.GetClaimsAsync(user);
 
         var stringClaims = claims.Select(x => x.Value).ToList();
 

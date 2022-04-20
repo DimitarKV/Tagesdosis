@@ -1,8 +1,10 @@
+using System.Security.Principal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tagesdosis.Application;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Data.Persistence;
+using Tagesdosis.Services.User.Identity;
 using Tagesdosis.Services.User.Security;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplication(typeof(AppUser).Assembly);
 builder.Services.AddAutoMapper(typeof(AppUser).Assembly);
 builder.Services.AddSecurity(builder.Configuration);
+builder.Services.AddTransient<IIdentityService, IdentityService>();
 
 var databaseConnString = builder.Configuration.GetConnectionString("Database");
 builder.Services.AddDbContext<UserDbContext>(opt => opt.UseSqlServer(databaseConnString));
