@@ -18,7 +18,13 @@ public class GetRolesForUserQueryHandler : IRequestHandler<GetRolesForUserQuery,
     {
         _userManager = userManager;
     }
-    
+        
+    /// <summary>
+    /// Handler for role retrievement
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<ApiResponse<List<string>>> Handle(GetRolesForUserQuery request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByNameAsync(request.UserName);

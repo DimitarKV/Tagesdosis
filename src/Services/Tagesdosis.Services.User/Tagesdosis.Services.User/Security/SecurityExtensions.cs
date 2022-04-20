@@ -8,6 +8,12 @@ namespace Tagesdosis.Services.User.Security;
 
 public static class SecurityExtensions
 {
+    /// <summary>
+    /// Configures the JWT token header and payload
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
     public static IServiceCollection AddSecurity(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthentication(o =>
@@ -31,10 +37,7 @@ public static class SecurityExtensions
             
         });
 
-        services.AddAuthorization(opt =>
-        {
-            opt.AddPolicy("AdminOnly", policy => policy.RequireClaim("User"));
-        });
+        services.AddAuthorization();
         
         return services;
     }
