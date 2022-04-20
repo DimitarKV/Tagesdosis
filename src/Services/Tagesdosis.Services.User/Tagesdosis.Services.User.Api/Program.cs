@@ -23,6 +23,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<UserDbContext>()
     .AddDefaultTokenProviders();
 builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 builder.Services.AddAuthentication(o =>
 {
