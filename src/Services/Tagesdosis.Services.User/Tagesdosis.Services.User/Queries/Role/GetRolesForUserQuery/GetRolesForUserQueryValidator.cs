@@ -1,4 +1,4 @@
-namespace Tagesdosis.Services.User.Queries.GetRolesForUserQuery;
+namespace Tagesdosis.Services.User.Queries.Role.GetRolesForUserQuery;
 
 public class GetRolesForUserQueryValidator
 {

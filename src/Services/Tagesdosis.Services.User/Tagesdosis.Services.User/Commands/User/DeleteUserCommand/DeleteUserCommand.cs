@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Identity;
 
 namespace Tagesdosis.Services.User.Commands.User.DeleteUserCommand;
 
@@ -13,11 +14,11 @@ public class DeleteUserCommand : IRequest<ApiResponse>
 
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ApiResponse>
 {
-    private UserManager<AppUser> _userManager;
+    private readonly IIdentityService _identityService;
 
-    public DeleteUserCommandHandler(UserManager<AppUser> userManager)
+    public DeleteUserCommandHandler(IIdentityService identityService)
     {
-        _userManager = userManager;
+        _identityService = identityService;
     }
 
     /// <summary>
@@ -28,8 +29,8 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ApiRe
     /// <returns></returns>
     public async Task<ApiResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        AppUser user = await _userManager.FindByNameAsync(request.UserName);
-        var result = await _userManager.DeleteAsync(user);
+        AppUser user = await _identityService.FindByNameAsync(request.UserName);
+        var result = await _identityService.DeleteAsync(user);
         if (result.Succeeded)
             return new ApiResponse("Deleted user " + request.UserName);
         return new ApiResponse("Unable to delete user with username " + request.UserName);

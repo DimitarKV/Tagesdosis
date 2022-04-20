@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Authorization;
 using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Identity;
 
 namespace Tagesdosis.Services.User.Commands.User.CreateUserCommand;
 
@@ -18,12 +19,12 @@ public class CreateUserCommand : IRequest<ApiResponse>
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiResponse>
 {
     private readonly IMapper _mapper;
-    private readonly UserManager<AppUser> _userManager;
+    private readonly IIdentityService _identityService;
 
-    public CreateUserCommandHandler(IMapper mapper, UserManager<AppUser> userManager)
+    public CreateUserCommandHandler(IMapper mapper, IIdentityService identityService)
     {
         _mapper = mapper;
-        _userManager = userManager;
+        _identityService = identityService;
     }
     
     /// <summary>
@@ -39,9 +40,9 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
         user.CreatedOn = DateTime.Now;
         user.UpdatedOn = DateTime.Now;
         
-        var result = await _userManager.CreateAsync(user, request.Password);
+        var result = await _identityService.CreateAsync(user, request.Password);
 
-        await _userManager.AddClaimAsync(user, Claims.User);
+        await _identityService.AddClaimAsync(user, Claims.User);
         
         if (result.Succeeded)
             return new ApiResponse("Successfully created a user");

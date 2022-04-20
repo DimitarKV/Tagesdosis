@@ -11,7 +11,7 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<UserCredentialsDTO, AppUser>();
-        
+        CreateMap<AppUser, UserDTO>();   
         CreateMap<CreateUserCommand, AppUser>();
         CreateMap<UpdateUserCommand, AppUser>();
         CreateMap<UserCredentialsDTO, CreateUserCommand>();

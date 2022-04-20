@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Identity;
 
 namespace Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
 
@@ -19,15 +20,15 @@ public class CreateTokenCommand : IRequest<ApiResponse<string>>
 public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, ApiResponse<string>>
 {
     private readonly IConfiguration _configuration;
-    private readonly UserManager<AppUser> _userManager;
+    private readonly IIdentityService _identityService;
 
     private const string UserIdPayloadProperty = "userId";
     private const int ExpirationInMinutes = 30;
     
-    public CreateTokenCommandHandler(IConfiguration configuration, UserManager<AppUser> userManager)
+    public CreateTokenCommandHandler(IConfiguration configuration, IIdentityService identityService)
     {
         _configuration = configuration;
-        _userManager = userManager;
+        _identityService = identityService;
     }
     
     /// <summary>
@@ -44,8 +45,8 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Api
         var credentials = new SigningCredentials(securityKey, 
             SecurityAlgorithms.HmacSha256);
         
-        var user = await _userManager.FindByNameAsync(request.UserName);
-        var claims = await _userManager.GetClaimsAsync(user);
+        var user = await _identityService.FindByNameAsync(request.UserName);
+        var claims = await _identityService.GetClaimsAsync(user);
         claims.Add(new Claim(ClaimTypes.Name, request.UserName));
         
         var token = new JwtSecurityToken(issuer: issuer,
