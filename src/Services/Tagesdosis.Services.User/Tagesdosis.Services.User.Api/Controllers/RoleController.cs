@@ -32,7 +32,7 @@ public class RoleController : ControllerBase
     
     [HttpPost]
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
-    public async Task<IActionResult> AddUserToRoleAsync([FromQuery] string role)
+    public async Task<IActionResult> AddRoleToUserAsync([FromQuery] string role)
     {
         var command = new AddRoleToUserCommand()
         {
