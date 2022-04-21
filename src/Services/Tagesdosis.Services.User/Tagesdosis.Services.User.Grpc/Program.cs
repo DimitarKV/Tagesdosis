@@ -9,8 +9,7 @@ using Tagesdosis.Services.User.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplication(typeof(AppUser).Assembly);
-builder.Services.AddAutoMapper(typeof(AppUser).Assembly);
+builder.Services.AddApplication(new [] {typeof(AppUser).Assembly, typeof(TokenService).Assembly});
 
 builder.Services.AddTransient<IIdentityService, IdentityService>();
 
@@ -43,6 +42,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<GreeterService>();
     endpoints.MapGrpcService<RoleService>();
+    endpoints.MapGrpcService<TokenService>();
 });
 
 // Configure the HTTP request pipeline.

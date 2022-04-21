@@ -8,14 +8,14 @@ namespace Tagesdosis.Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services, Assembly assembly)
+    public static IServiceCollection AddApplication(this IServiceCollection services, Assembly[] assemblies)
     {
-        services.AddMediatR(assembly);
+        services.AddMediatR(assemblies);
         
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
-        services.AddValidatorsFromAssembly(assembly);
-        services.AddAutoMapper(assembly);
+        services.AddValidatorsFromAssemblies(assemblies);
+        services.AddAutoMapper(assemblies);
         
         return services;
     }

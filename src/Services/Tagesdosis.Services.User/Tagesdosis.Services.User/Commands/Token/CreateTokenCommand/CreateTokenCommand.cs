@@ -22,7 +22,6 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Api
     private readonly IConfiguration _configuration;
     private readonly IIdentityService _identityService;
 
-    private const string UserIdPayloadProperty = "userId";
     private const int ExpirationInMinutes = 30;
     
     public CreateTokenCommandHandler(IConfiguration configuration, IIdentityService identityService)
