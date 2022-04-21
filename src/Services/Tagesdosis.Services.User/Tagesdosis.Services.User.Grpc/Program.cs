@@ -9,8 +9,6 @@ using Tagesdosis.Services.User.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApplication(typeof(AppUser).Assembly);
 builder.Services.AddAutoMapper(typeof(AppUser).Assembly);
 

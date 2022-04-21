@@ -9,19 +9,19 @@ namespace Tagesdosis.Services.User.Grpc.Services;
 public class RoleService : Role.RoleService.RoleServiceBase
 {
     private IMediator _mediator;
-    // private readonly HttpContextAccessor _httpContextAccessor;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public RoleService(IMediator mediator)
+    public RoleService(IMediator mediator, IHttpContextAccessor httpContextAccessor)
     {
         _mediator = mediator;
-        // _httpContextAccessor = httpContextAccessor;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     [Authorize(AuthenticationSchemes = "Bearer", Roles = "User")]
     public override async Task<GetRolesForUserReply> GetRolesForUser(GetRolesForUserRequest request,
         ServerCallContext context)
     {
-        var query = new GetRolesForUserQuery {UserName = "mitko"};
+        var query = new GetRolesForUserQuery {UserName = _httpContextAccessor.HttpContext!.User.Identity!.Name!};
         var response = await _mediator.Send(query);
     
         if (response.IsValid)
