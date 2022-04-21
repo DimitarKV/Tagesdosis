@@ -1,10 +1,8 @@
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
-using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Identity;
 
-namespace Tagesdosis.Services.User.Queries.GetRolesForUserQuery;
+namespace Tagesdosis.Services.User.Queries.Role.GetRolesForUser;
 
 public class GetRolesForUserQuery : IRequest<ApiResponse<List<string>>>
 {
