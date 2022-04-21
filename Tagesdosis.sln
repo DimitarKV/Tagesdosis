@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Services.User.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Services.User.Grpc", "src\Services\Tagesdosis.Services.User\Tagesdosis.Services.User.Grpc\Tagesdosis.Services.User.Grpc.csproj", "{1BFD39C4-487D-440E-8416-3567275D3444}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Tests.User", "tests\Tagesdosis.Tests.User\Tagesdosis.Tests.User.csproj", "{2FCEF680-2CDC-4AB8-804A-4A5D8BBC55E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Tests.Common", "tests\Tagesdosis.Tests.Common\Tagesdosis.Tests.Common.csproj", "{0F6362E6-3FE9-4382-A41A-CDE25D610BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +54,8 @@ Global
 		{4C8C5801-1645-4362-BF10-8E5E163BE5F3} = {B49F08F9-31F9-4B97-B8D7-DCE9BFD4B461}
 		{9EF98AE7-C817-447C-9CCE-08B0B37390FF} = {B49F08F9-31F9-4B97-B8D7-DCE9BFD4B461}
 		{1BFD39C4-487D-440E-8416-3567275D3444} = {B49F08F9-31F9-4B97-B8D7-DCE9BFD4B461}
+		{2FCEF680-2CDC-4AB8-804A-4A5D8BBC55E1} = {6B28B997-080C-4755-9806-C007960F74E9}
+		{0F6362E6-3FE9-4382-A41A-CDE25D610BF4} = {6B28B997-080C-4755-9806-C007960F74E9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{62773336-7E3C-4F5F-85B9-DC60DB977E4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -80,5 +86,13 @@ Global
 		{1BFD39C4-487D-440E-8416-3567275D3444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BFD39C4-487D-440E-8416-3567275D3444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BFD39C4-487D-440E-8416-3567275D3444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FCEF680-2CDC-4AB8-804A-4A5D8BBC55E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FCEF680-2CDC-4AB8-804A-4A5D8BBC55E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FCEF680-2CDC-4AB8-804A-4A5D8BBC55E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FCEF680-2CDC-4AB8-804A-4A5D8BBC55E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6362E6-3FE9-4382-A41A-CDE25D610BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6362E6-3FE9-4382-A41A-CDE25D610BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6362E6-3FE9-4382-A41A-CDE25D610BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6362E6-3FE9-4382-A41A-CDE25D610BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

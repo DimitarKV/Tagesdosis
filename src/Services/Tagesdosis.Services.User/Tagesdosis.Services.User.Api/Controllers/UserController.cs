@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
 using Tagesdosis.Services.User.Commands.User.DeleteUserCommand;
 using Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
-using Tagesdosis.Services.User.Data.Persistence;
 using Tagesdosis.Services.User.DTOs;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
@@ -17,13 +15,11 @@ public class UserController : ControllerBase
 {
     private IMapper _mapper;
     private readonly IMediator _mediator;
-    private readonly UserDbContext _dbContext;
 
-    public UserController(IMediator mediator, IMapper mapper, UserDbContext dbContext)
+    public UserController(IMediator mediator, IMapper mapper)
     {
         _mapper = mapper;
         _mediator = mediator;
-        _dbContext = dbContext;
     }
 
     [HttpPost]
@@ -37,13 +33,6 @@ public class UserController : ControllerBase
         if (response.IsValid)
             return Ok(response);
         return BadRequest(response);
-    }
-
-    [HttpGet]
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    public IActionResult GetAllUsersAsync()
-    {
-        return Ok(_dbContext.Users!.ToList());
     }
 
     [HttpPut]

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Tagesdosis.Services.User.Queries.GetRolesForUserQuery;
+using Tagesdosis.Services.User.Queries.Role.GetRolesForUser;
 
 namespace Tagesdosis.Services.User.Grpc.Services;
 
