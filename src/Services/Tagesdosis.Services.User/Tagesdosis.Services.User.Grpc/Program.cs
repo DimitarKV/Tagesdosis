@@ -1,8 +1,5 @@
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Tagesdosis.Application;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Data.Persistence;
@@ -11,6 +8,7 @@ using Tagesdosis.Services.User.Identity;
 using Tagesdosis.Services.User.Security;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApplication(typeof(AppUser).Assembly);
@@ -46,6 +44,7 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<GreeterService>();
+    endpoints.MapGrpcService<RoleService>();
 });
 
 // Configure the HTTP request pipeline.

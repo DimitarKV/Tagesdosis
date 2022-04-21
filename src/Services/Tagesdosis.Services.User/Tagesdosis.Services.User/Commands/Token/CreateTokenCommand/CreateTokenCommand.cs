@@ -54,9 +54,7 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Api
             signingCredentials: credentials,
             expires: DateTime.UtcNow.AddMinutes(ExpirationInMinutes),
             claims: claims);
-
-        token.Payload[UserIdPayloadProperty] = user.Id;
-            
+        
         var tokenHandler = new JwtSecurityTokenHandler();
         var stringToken = tokenHandler.WriteToken(token);
 
