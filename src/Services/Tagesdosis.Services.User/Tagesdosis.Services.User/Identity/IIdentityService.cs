@@ -6,7 +6,7 @@ namespace Tagesdosis.Services.User.Identity;
 
 public interface IIdentityService
 {
-    public Task<AppUser> FindByNameAsync(string? userName);
+    public Task<AppUser?> FindByNameAsync(string? userName);
     public Task<IdentityResult> AddClaimAsync(AppUser user, Claim claim);
     public Task<IList<Claim>> GetClaimsAsync(AppUser user);
     public Task<IdentityResult> CreateAsync(AppUser user, string password);

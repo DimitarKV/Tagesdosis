@@ -11,6 +11,16 @@ namespace Tagesdosis.Services.User.Queries.User.GetUserQuery;
 public class GetUserQuery : IRequest<ApiResponse<UserDTO>>
 {
     public string UserName { get; set; }
+
+    public GetUserQuery()
+    {
+        
+    }
+
+    public GetUserQuery(string userName)
+    {
+        UserName = userName;
+    }
 }
 
 
