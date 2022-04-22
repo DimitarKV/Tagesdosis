@@ -13,4 +13,5 @@ public interface IIdentityService
     public Task<IdentityResult> DeleteAsync(AppUser user);
     public Task<IdentityResult> ChangePasswordAsync(AppUser user, string oldPassword, string newPassword);
     public Task<IdentityResult> UpdateAsync(AppUser user);
+    public Task<bool> CheckPasswordAsync(AppUser user, string password);
 }

@@ -10,6 +10,16 @@ namespace Tagesdosis.Services.User.Commands.User.DeleteUserCommand;
 public class DeleteUserCommand : IRequest<ApiResponse>
 {
     public string UserName { get; set; }
+
+    public DeleteUserCommand()
+    {
+        
+    }
+
+    public DeleteUserCommand(string userName)
+    {
+        UserName = userName;
+    }
 }
 
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ApiResponse>

@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.4" />
         <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.4" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
         <PackageReference Include="Moq" Version="4.17.2" />
@@ -25,6 +26,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\Services\Tagesdosis.Services.User\Tagesdosis.Services.User.Api\Tagesdosis.Services.User.Api.csproj" />
       <ProjectReference Include="..\..\src\Services\Tagesdosis.Services.User\Tagesdosis.Services.User\Tagesdosis.Services.User.csproj" />
+      <ProjectReference Include="..\Tagesdosis.Tests.Common\Tagesdosis.Tests.Common.csproj" />
     </ItemGroup>
 
 </Project>

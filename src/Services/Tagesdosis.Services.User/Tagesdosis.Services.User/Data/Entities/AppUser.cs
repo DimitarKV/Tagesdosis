@@ -7,4 +7,14 @@ public class AppUser : IdentityUser, IEntity<string>
 {
     public DateTime CreatedOn { get; set; }
     public DateTime UpdatedOn { get; set; }
+
+    public AppUser()
+    {
+        
+    }
+    
+    public AppUser(string userName)
+    {
+        UserName = userName;
+    }
 }
