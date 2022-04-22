@@ -8,7 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="11.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Tagesdosis.Application\Tagesdosis.Application.csproj" />
+      <ProjectReference Include="..\Tagesdosis.Services.User\Tagesdosis.Services.User.csproj" />
     </ItemGroup>
 
 </Project>

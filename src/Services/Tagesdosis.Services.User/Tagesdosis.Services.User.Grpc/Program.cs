@@ -1,19 +1,37 @@
+using Tagesdosis.Application;
+using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Extensions;
 using Tagesdosis.Services.User.Grpc.Services;
+using Tagesdosis.Services.User.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Additional configuration is required to successfully run gRPC on macOS.
-// For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
-
-// Add services to the container.
+// gRPC configuration
 builder.Services.AddGrpc();
+
+// Data layer
+builder.AddPersistence();
+
+// MediatR and FluentValidation pipeline configuration
+builder.Services.AddApplication(new [] {typeof(AppUser).Assembly, typeof(TokenService).Assembly});
+builder.Services.AddTransient<IIdentityService, IdentityService>();
+
+// Identity and security
+builder.Services.AddIdentity();
+builder.AddSecurity();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
-app.MapGet("/",
-    () =>
-        "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+app.EnsureDatabaseCreated();
+app.UseRouting();
+app.UseSecurity();
+
+// gRPC endpoints configuration
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGrpcService<GreeterService>();
+    endpoints.MapGrpcService<RoleService>();
+    endpoints.MapGrpcService<TokenService>();
+});
 
 app.Run();

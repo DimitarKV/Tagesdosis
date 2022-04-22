@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+package role;
+
+service RoleService {
+  rpc GetRolesForUser (GetRolesForUserRequest) returns (GetRolesForUserReply);
+  rpc AddRoleToUser (AddRoleToUserRequest) returns (AddRoleToUserResponse);
+}
+
+message GetRolesForUserRequest {
+}
+
+message GetRolesForUserReply {
+  repeated string roles = 1;
+}
+
+message AddRoleToUserRequest {
+  string userName = 1;
+  string role = 2;
+}
+
+message AddRoleToUserResponse {
+  string message = 1;
+}

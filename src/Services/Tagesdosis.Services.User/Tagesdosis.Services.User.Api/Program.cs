@@ -1,25 +1,36 @@
+using Tagesdosis.Application;
+using Tagesdosis.Services.User.Data.Entities;
+using Tagesdosis.Services.User.Extensions;
+using Tagesdosis.Services.User.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Web API Controllers and Swagger/OpenApi configuration
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Data layer
+builder.AddPersistence();
+
+// MediatR and FluentValidation pipeline configuration
+builder.Services.AddApplication(new [] {typeof(AppUser).Assembly});
+builder.Services.AddTransient<IIdentityService, IdentityService>();
+
+// Identity and security
+builder.Services.AddIdentity();
+builder.AddSecurity();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
+app.EnsureDatabaseCreated();
+app.UseSecurity();
 app.MapControllers();
 
 app.Run();

@@ -8,11 +8,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\*" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Tagesdosis.Application\Tagesdosis.Application.csproj" />
+      <ProjectReference Include="..\Tagesdosis.Services.User\Tagesdosis.Services.User.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Protos\dh\greet\Greeter\SayHello-request.json" />
+      <_ContentIncludedByDefault Remove="Protos\dh\role\RoleService\GetRolesForUser-request.json" />
     </ItemGroup>
 
 </Project>
