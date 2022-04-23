@@ -1,52 +1,48 @@
-using System.Security.Principal;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Tagesdosis.Application;
+using Tagesdosis.Infrastructure.ProtectedStorage.AzureKeyVault;
 using Tagesdosis.Services.User.Data.Entities;
-using Tagesdosis.Services.User.Data.Persistence;
+using Tagesdosis.Services.User.Extensions;
 using Tagesdosis.Services.User.Identity;
-using Tagesdosis.Services.User.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Web API Controllers and Swagger/OpenApi configuration
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Data layer
+builder.AddPersistence();
+
+// MediatR and FluentValidation pipeline configuration
 builder.Services.AddApplication(new [] {typeof(AppUser).Assembly});
-builder.Services.AddAutoMapper(typeof(AppUser).Assembly);
-builder.Services.AddSecurity(builder.Configuration);
 builder.Services.AddTransient<IIdentityService, IdentityService>();
 
-var databaseConnString = builder.Configuration.GetConnectionString("Database");
-builder.Services.AddDbContext<UserDbContext>(opt => opt.UseSqlServer(databaseConnString));
-
-builder.Services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<UserDbContext>()
-    .AddDefaultTokenProviders();
+// Identity and security
+builder.Services.AddIdentity();
+builder.AddSecurity();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetService<UserDbContext>();
-    db!.Database.EnsureCreated();
-}
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+/*if (builder.Environment.IsProduction())
+{
+    builder.AddAzureKeyVault(new AzureKeyVaultOptions
+    {
+        CertificateThumbprint = builder.Configuration["AzureKeyVault:CertificateThumbprint"],
+        ApplicationId = builder.Configuration["AzureKeyVault:ApplicationId"],
+        TenantId = builder.Configuration["AzureKeyVault:TenantId"],
+        Name = builder.Configuration["AzureKeyVault:Name"]
+    });
+}*/
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.UseHttpsRedirection();
-
+app.EnsureDatabaseCreated();
+app.UseSecurity();
 app.MapControllers();
+
 
 app.Run();

@@ -15,6 +15,17 @@ public class CreateTokenCommand : IRequest<ApiResponse<string>>
 {
     public string UserName { get; set; }
     public string Password { get; set; }
+
+    public CreateTokenCommand()
+    {
+        
+    }
+
+    public CreateTokenCommand(string userName, string password)
+    {
+        UserName = userName;
+        Password = password;
+    }
 }
 
 public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, ApiResponse<string>>

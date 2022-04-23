@@ -48,4 +48,9 @@ public class IdentityService : IIdentityService
     {
         return _userManager.UpdateAsync(user);
     }
+
+    public Task<bool> CheckPasswordAsync(AppUser user, string password)
+    {
+        return _userManager.CheckPasswordAsync(user, password);
+    }
 }

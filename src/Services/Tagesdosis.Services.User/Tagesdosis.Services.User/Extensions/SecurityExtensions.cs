@@ -1,21 +1,21 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Tagesdosis.Services.User.Security;
+namespace Tagesdosis.Services.User.Extensions;
 
 public static class SecurityExtensions
 {
     /// <summary>
     /// Configures the JWT token header and payload
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="configuration"></param>
-    /// <returns></returns>
-    public static IServiceCollection AddSecurity(this IServiceCollection services, IConfiguration configuration)
+    public static void AddSecurity(this WebApplicationBuilder builder)
     {
+        var services = builder.Services;
+        var configuration = builder.Configuration;
+        
         services.AddAuthentication(o =>
         {
             o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,7 +38,12 @@ public static class SecurityExtensions
         });
 
         services.AddAuthorization();
-        
-        return services;
+    }
+
+    public static void UseSecurity(this WebApplication app)
+    {
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.UseHttpsRedirection();
     }
 }

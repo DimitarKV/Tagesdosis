@@ -7,6 +7,16 @@ namespace Tagesdosis.Services.User.Queries.Role.GetRolesForUser;
 public class GetRolesForUserQuery : IRequest<ApiResponse<List<string>>>
 {
     public string UserName { get; set; }
+
+    public GetRolesForUserQuery()
+    {
+        
+    }
+
+    public GetRolesForUserQuery(string userName)
+    {
+        UserName = userName;
+    }
 }
 
 public class GetRolesForUserQueryHandler : IRequestHandler<GetRolesForUserQuery, ApiResponse<List<string>>>

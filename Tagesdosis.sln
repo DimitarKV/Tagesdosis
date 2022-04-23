@@ -2,9 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{3460B08C-D7BB-400A-8280-557D74B5737A}"
 	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
-		tye.yaml = tye.yaml
 		.gitignore = .gitignore
+		src\tye.yaml = src\tye.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A751AFC0-B47E-4B38-BB56-C2B5F64F19A3}"

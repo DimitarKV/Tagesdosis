@@ -11,6 +11,17 @@ public class AddRoleToUserCommand : IRequest<ApiResponse>
 {
     public string? UserName { get; set; }
     public string Role { get; set; }
+
+    public AddRoleToUserCommand()
+    {
+        
+    }
+
+    public AddRoleToUserCommand(string userName, string role)
+    {
+        UserName = userName;
+        Role = role;
+    }
 }
 
 public class AddRoleToUserCommandHandler : IRequestHandler<AddRoleToUserCommand, ApiResponse>
