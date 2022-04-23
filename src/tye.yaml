@@ -1,0 +1,24 @@
+name: tagesdosis
+services:
+- name: tagesdosis-gateways-portal
+  project: Gateways/Tagesdosis.Gateways.Portal/Tagesdosis.Gateways.Portal.csproj
+  
+- name: tagesdosis-services-user-api
+  project: Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api/Tagesdosis.Services.User.Api.csproj
+  bindings:
+    - port: 5000
+      protocol: http
+      name: "tagesdosis-services-user-api-http"
+    - port: 5001
+      protocol: https
+      name: "tagesdosis-services-user-api-https"
+
+- name: tagesdosis-services-user-grpc
+  project: Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Grpc/Tagesdosis.Services.User.Grpc.csproj
+  bindings:
+    - port: 5002
+      protocol: http
+      name: "tagesdosis-services-user-grpc-http"
+    - port: 5003
+      protocol: https
+      name: "tagesdosis-services-user-grpc-https"

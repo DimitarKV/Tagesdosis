@@ -3,22 +3,27 @@
 package role;
 
 service RoleService {
-  rpc GetRolesForUser (GetRolesForUserRequest) returns (GetRolesForUserReply);
-  rpc AddRoleToUser (AddRoleToUserRequest) returns (AddRoleToUserResponse);
+  rpc GetRolesForUser (GetRolesForUserRequest) returns (GrpcApiResponseStrings);
+  rpc AddRoleToUser (AddRoleToUserRequest) returns (GrpcApiResponse);
+}
+
+message GrpcApiResponseStrings {
+  string message = 1;
+  repeated string errors = 2;
+  bool isValid = 3;
+  repeated string result = 4;
+}
+
+message GrpcApiResponse {
+  string message = 1;
+  repeated string errors = 2;
+  bool isValid = 3;
 }
 
 message GetRolesForUserRequest {
 }
 
-message GetRolesForUserReply {
-  repeated string roles = 1;
-}
-
 message AddRoleToUserRequest {
   string userName = 1;
   string role = 2;
-}
-
-message AddRoleToUserResponse {
-  string message = 1;
 }

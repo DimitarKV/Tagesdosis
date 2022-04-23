@@ -45,7 +45,7 @@ public class AddRoleToUserCommandHandler : IRequestHandler<AddRoleToUserCommand,
         var result = await _identityService.AddClaimAsync(user, new Claim(ClaimTypes.Role, request.Role));
 
         if (result.Succeeded)
-            return new ApiResponse("Added user to role");
+            return new ApiResponse("Added role to user!");
         
         return new ApiResponse("Invalid", result.Errors.Select(x => x.Description));
     }

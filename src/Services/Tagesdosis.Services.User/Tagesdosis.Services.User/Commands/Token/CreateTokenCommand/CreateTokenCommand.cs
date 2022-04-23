@@ -56,6 +56,7 @@ public class CreateTokenCommandHandler : IRequestHandler<CreateTokenCommand, Api
             SecurityAlgorithms.HmacSha256);
         
         var user = await _identityService.FindByNameAsync(request.UserName);
+        
         var claims = await _identityService.GetClaimsAsync(user);
         claims.Add(new Claim(ClaimTypes.Name, request.UserName));
         

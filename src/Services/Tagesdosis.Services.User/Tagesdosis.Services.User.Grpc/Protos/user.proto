@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package user;
+
+option csharp_namespace = "UserGrpc";
+
+service UserService {
+  rpc RegisterUser (RegisterUserRequest) returns (GrpcApiResponse);
+  rpc UpdateUser (UpdateUserRequest) returns (GrpcApiResponse);
+  rpc DeleteUser (DeleteUserRequest) returns (GrpcApiResponse);
+}
+
+message GrpcApiResponse {
+  string message = 1;
+  repeated string errors = 2;
+  bool isValid = 3;
+}
+
+message RegisterUserRequest {
+  string userName = 1;
+  string password = 2;
+  string email = 3;
+}
+
+message UpdateUserRequest {
+  bool changeUserName = 2;
+  string newUserName = 3;
+  bool changeEmail = 4;
+  string email = 5;
+  bool changePassword = 6;
+  string currentPassword = 7;
+  string newPassword = 8;
+}
+
+message DeleteUserRequest {}

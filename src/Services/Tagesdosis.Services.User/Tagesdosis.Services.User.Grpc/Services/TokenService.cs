@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using Grpc.Core;
 using MediatR;
 using Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
@@ -17,14 +18,11 @@ public class TokenService : Token.TokenService.TokenServiceBase
         _mediator = mediator;
     }
 
-    public override async Task<GetTokenResponse> GetToken(GetTokenRequest request, ServerCallContext context)
+    public override async Task<ApiResponseString> GetToken(GetTokenRequest request, ServerCallContext context)
     {
         var command = _mapper.Map<CreateTokenCommand>(request);
-        var response = await _mediator.Send(command);
+        var result = await _mediator.Send(command);
 
-        if (response.IsValid)
-            return new GetTokenResponse{Message = response.Message, Token = response.Result};
-        
-        return new GetTokenResponse{Message = response.Message};
+        return _mapper.Map<ApiResponseString>(result);
     }
 }

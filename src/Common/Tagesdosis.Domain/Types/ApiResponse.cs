@@ -11,7 +11,7 @@ public class ApiResponse
         Errors = errors?.ToList();
     }
 
-    public bool IsValid => Errors == null || !Errors.Any();
+    public bool IsValid => (Errors == null || !Errors.Any());
 }
 
 public class ApiResponse<TModel> : ApiResponse

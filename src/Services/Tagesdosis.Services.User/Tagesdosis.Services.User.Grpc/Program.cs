@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Tagesdosis.Application;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
@@ -29,9 +31,9 @@ app.UseSecurity();
 // gRPC endpoints configuration
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapGrpcService<GreeterService>();
     endpoints.MapGrpcService<RoleService>();
     endpoints.MapGrpcService<TokenService>();
+    endpoints.MapGrpcService<UserService>();
 });
 
 app.Run();
