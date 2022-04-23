@@ -4,11 +4,13 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api/Tagesdosis.Services.User.Api.csproj", "Tagesdosis.Services.User.Api/"]
+COPY ["src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api/Tagesdosis.Services.User.Api.csproj", "src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api/"]
+COPY ["src/Common/Tagesdosis.Domain/Tagesdosis.Domain.csproj", "src/Common/Tagesdosis.Domain/"]
+COPY ["src/Common/Tagesdosis.Application/Tagesdosis.Application.csproj", "src/Common/Tagesdosis.Application/"]
+COPY ["src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User/Tagesdosis.Services.User.csproj", "src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User/"]
 RUN dotnet restore "src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api/Tagesdosis.Services.User.Api.csproj"
 COPY . .
-WORKDIR "/src/Tagesdosis.Services.User.Api"
+WORKDIR "/src/Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api"
 RUN dotnet build "Tagesdosis.Services.User.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

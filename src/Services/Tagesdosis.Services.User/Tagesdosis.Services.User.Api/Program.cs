@@ -1,4 +1,5 @@
 using Tagesdosis.Application;
+using Tagesdosis.Infrastructure.ProtectedStorage.AzureKeyVault;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
 using Tagesdosis.Services.User.Identity;
@@ -28,9 +29,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+/*if (builder.Environment.IsProduction())
+{
+    builder.AddAzureKeyVault(new AzureKeyVaultOptions
+    {
+        CertificateThumbprint = builder.Configuration["AzureKeyVault:CertificateThumbprint"],
+        ApplicationId = builder.Configuration["AzureKeyVault:ApplicationId"],
+        TenantId = builder.Configuration["AzureKeyVault:TenantId"],
+        Name = builder.Configuration["AzureKeyVault:Name"]
+    });
+}*/
 
 app.EnsureDatabaseCreated();
 app.UseSecurity();
 app.MapControllers();
+
 
 app.Run();
