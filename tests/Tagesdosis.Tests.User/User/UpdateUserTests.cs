@@ -17,7 +17,12 @@ public class UpdateUserTests : UserTestsBase
         await InMemory.DbContext.Database.EnsureCreatedAsync();
         await CreateUserAsync(userName, password);
         
-        var command = new UpdateUserCommand(userName, newUserName, "", password , "");
+        var command = new UpdateUserCommand
+        {
+            UserName = userName,
+            CurrentPassword = password,
+            NewUserName = newUserName
+        };
         var handler = new UpdateUserCommandHandler(Mapper, IdentityService);
         var validator = new UpdateUserCommandValidator();
 
@@ -34,7 +39,12 @@ public class UpdateUserTests : UserTestsBase
         await InMemory.DbContext.Database.EnsureDeletedAsync();
         await InMemory.DbContext.Database.EnsureCreatedAsync();
         
-        var command = new UpdateUserCommand(userName, newUserName, "", password , "");
+        var command = new UpdateUserCommand
+        {
+            UserName = userName,
+            CurrentPassword = password,
+            NewUserName = newUserName
+        };
         var handler = new UpdateUserCommandHandler(Mapper, IdentityService);
         var validator = new UpdateUserCommandValidator();
 

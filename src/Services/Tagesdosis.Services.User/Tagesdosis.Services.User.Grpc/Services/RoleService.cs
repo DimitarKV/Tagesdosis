@@ -1,7 +1,10 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Grpc.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Role;
 using Tagesdosis.Services.User.Identity;
 using Tagesdosis.Services.User.Queries.Role.GetRolesForUser;

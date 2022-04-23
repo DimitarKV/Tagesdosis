@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using Grpc.Core;
 using MediatR;
 using Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
