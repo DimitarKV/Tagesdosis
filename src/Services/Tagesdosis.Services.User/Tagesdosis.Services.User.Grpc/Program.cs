@@ -40,9 +40,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapGrpcService<GreeterService>();
     endpoints.MapGrpcService<RoleService>();
     endpoints.MapGrpcService<TokenService>();
+    endpoints.MapGrpcService<UserService>();
 });
 
 // Configure the HTTP request pipeline.

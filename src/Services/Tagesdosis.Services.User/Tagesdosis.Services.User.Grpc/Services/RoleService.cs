@@ -3,7 +3,6 @@ using Grpc.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Role;
-using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Identity;
 using Tagesdosis.Services.User.Queries.Role.GetRolesForUser;
 
@@ -22,7 +21,7 @@ public class RoleService : Role.RoleService.RoleServiceBase
         _identityService = identityService;
     }
 
-    [Authorize(AuthenticationSchemes = "Bearer", Roles = "User")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public override async Task<GetRolesForUserReply> GetRolesForUser(GetRolesForUserRequest request,
         ServerCallContext context)
     {

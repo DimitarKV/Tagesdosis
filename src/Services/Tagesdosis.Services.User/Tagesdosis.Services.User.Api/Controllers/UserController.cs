@@ -39,7 +39,7 @@ public class UserController : ControllerBase
     [Authorize(AuthenticationSchemes = "Bearer")]
     public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand updateUserCommand)
     {
-        updateUserCommand.UserName = User.Identity.Name;
+        updateUserCommand.UserName = User.Identity!.Name!;
         var response = await _mediator.Send(updateUserCommand);
 
         if (response.IsValid)
