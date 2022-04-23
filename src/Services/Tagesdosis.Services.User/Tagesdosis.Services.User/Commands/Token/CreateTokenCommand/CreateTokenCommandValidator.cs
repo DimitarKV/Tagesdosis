@@ -13,6 +13,6 @@ public class CreateTokenCommandValidator : AbstractValidator<CreateTokenCommand>
             .MustAsync(async (pair, _) =>
                 await identityService.CheckPasswordAsync(await identityService.FindByNameAsync(pair.UserName), pair.Password))
             .WithErrorCode("401")
-            .WithMessage("Wrong password");
+            .WithMessage("Wrong credentials");
     }
 }

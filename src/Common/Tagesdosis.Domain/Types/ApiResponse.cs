@@ -11,14 +11,7 @@ public class ApiResponse
         Errors = errors?.ToList();
     }
 
-    private bool isInvalid = false;
-    public ApiResponse SetInvalid()
-    {
-        isInvalid = true;
-        return this;
-    }
-
-    public bool IsValid => (Errors == null || !Errors.Any()) && !isInvalid;
+    public bool IsValid => (Errors == null || !Errors.Any());
 }
 
 public class ApiResponse<TModel> : ApiResponse

@@ -39,13 +39,13 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
     public async Task<ApiResponse> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _identityService.FindByNameAsync(request.UserName);
-        
+
         if (user is null)
-            return new ApiResponse("Didn't find user with username " + request.UserName).SetInvalid();
-        
+            return new ApiResponse("An error occurred while updating a user", new[] {"Didn't find user with username " + request.UserName});
+
         if (request.ChangeUsername)
             user.UserName = request.NewUserName;
-        
+
         if (request.ChangeEmail)
             user.Email = request.Email;
 
@@ -54,7 +54,8 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
         {
             result = await _identityService.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
             if (!result.Succeeded)
-                return new ApiResponse("Couldn't change password of user " + request.UserName, result.Errors.Select(e => e.Description));
+                return new ApiResponse("An error occurred while updating a user " + request.UserName,
+                    result.Errors.Select(e => e.Description));
         }
 
         if (request.ChangeEmail || request.ChangePassword || request.ChangeUsername)
@@ -65,11 +66,11 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
         string messageIfPasswordChanged = "";
         if (request.ChangeUsername)
             messageIfPasswordChanged = " Please login again with your new username " + request.NewUserName;
-        
+
         if (result.Succeeded)
             return new ApiResponse("Successfully updated user " + request.UserName + "." + messageIfPasswordChanged);
 
-        return new ApiResponse("An error occurred while creating a user",
+        return new ApiResponse("An error occurred while updating a user",
             result.Errors.Select(x => x.Description));
     }
 }

@@ -3,7 +3,7 @@ syntax = "proto3";
 package token;
 
 service TokenService {
-  rpc GetToken (GetTokenRequest) returns (GetTokenResponse);
+  rpc GetToken (GetTokenRequest) returns (ApiResponseString);
 }
 
 message GetTokenRequest {
@@ -11,7 +11,9 @@ message GetTokenRequest {
   string password = 2;
 }
 
-message GetTokenResponse {
+message ApiResponseString {
   string message = 1;
-  string token = 2; 
+  repeated string errors = 2;
+  bool isValid = 3;
+  string result = 4;
 }

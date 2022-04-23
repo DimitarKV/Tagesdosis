@@ -53,7 +53,11 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
         user.UpdatedOn = DateTime.Now;
         
         var result = await _identityService.CreateAsync(user, request.Password);
-
+        
+        if(!result.Succeeded)
+            return new ApiResponse("An error occurred while creating a user",
+                result.Errors.Select(x => x.Description));
+        
         await _identityService.AddClaimAsync(user, Claims.User);
         
         if (result.Succeeded)

@@ -46,7 +46,10 @@ public class UserService : UserGrpc.UserService.UserServiceBase
     [Authorize(AuthenticationSchemes = "Bearer")]
     public override async Task<GrpcApiResponse> DeleteUser(DeleteUserRequest request, ServerCallContext context)
     {
-        var command = new DeleteUserCommand();
+        var command = new DeleteUserCommand
+        {
+            UserName = _httpContextAccessor.HttpContext!.User.Identity!.Name!
+        };
         var result = await _mediator.Send(command);
 
         return _mapper.Map<GrpcApiResponse>(result);
