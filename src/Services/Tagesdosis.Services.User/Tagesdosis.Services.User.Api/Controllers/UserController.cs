@@ -54,7 +54,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> DeleteUser()
     {
         var command = new DeleteUserCommand();
-        command.UserName = User.Identity.Name;
+        command.UserName = User.Identity!.Name;
         
         var response = await _mediator.Send(command);
 
