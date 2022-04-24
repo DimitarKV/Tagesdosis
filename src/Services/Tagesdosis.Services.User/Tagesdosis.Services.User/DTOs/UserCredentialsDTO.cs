@@ -1,4 +1,4 @@
-﻿namespace Tagesdosis.Services.User.Api.DTOs;
+﻿namespace Tagesdosis.Services.User.DTOs;
 
 public class UserCredentialsDTO
 {

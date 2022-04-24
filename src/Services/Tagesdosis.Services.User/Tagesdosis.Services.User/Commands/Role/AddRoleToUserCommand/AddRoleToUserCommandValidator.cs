@@ -1,6 +1,4 @@
 using FluentValidation;
-using Microsoft.AspNetCore.Identity;
-using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Identity;
 
 namespace Tagesdosis.Services.User.Commands.Role.AddRoleToUserCommand;

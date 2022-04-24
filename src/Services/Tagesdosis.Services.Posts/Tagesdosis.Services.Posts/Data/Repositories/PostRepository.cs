@@ -15,9 +15,21 @@ public class PostRepository : IPostRepository
 
     public async Task<int> SavePostAsync(Post post)
     {
-        var entry = _context.Posts.Add(post);
+        var entry = _context.Posts!.Add(post);
         await _context.SaveChangesAsync();
 
         return entry.Entity.Id;
+    }
+
+    public async Task<Post> FindByIdAsync(int id)
+    {
+        Post post = await _context.Posts!.FindAsync(id);
+        return post;
+    }
+
+    public async Task DeletePostAsync(int id)
+    {
+        _context.Posts.Remove(await FindByIdAsync(id));
+        _context.SaveChanges();
     }
 }

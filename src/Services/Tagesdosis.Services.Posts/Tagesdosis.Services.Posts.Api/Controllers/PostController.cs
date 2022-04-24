@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.Posts.Commands.CreatePostCommand;
+using Tagesdosis.Services.Posts.Commands.DeletePostCommand;
 using Tagesdosis.Services.Posts.DTOs;
 
 namespace Tagesdosis.Services.Posts.Api.Controllers;
@@ -27,6 +28,18 @@ public class PostController : ControllerBase
     {
         var command = _mapper.Map<CreatePostCommand>(postDto);
         command.UserName = User.Identity!.Name!;
+        var result = await _mediator.Send(command);
+
+        if (result.IsValid)
+            return Ok(result);
+        return BadRequest(result);
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public async Task<IActionResult> DeletePost(int id)
+    {
+        var command = new DeletePostCommand {Id = id, UserName = User.Identity!.Name!};
         var result = await _mediator.Send(command);
 
         if (result.IsValid)

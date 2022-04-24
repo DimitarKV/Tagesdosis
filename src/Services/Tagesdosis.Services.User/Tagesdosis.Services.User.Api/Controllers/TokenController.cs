@@ -3,8 +3,8 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Tagesdosis.Services.User.Api.DTOs;
 using Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
+using Tagesdosis.Services.User.DTOs;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
 

@@ -66,4 +66,4 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
         return new ApiResponse("An error occurred while creating a user",
             result.Errors.Select(x => x.Description));
     }
-}
+}   
