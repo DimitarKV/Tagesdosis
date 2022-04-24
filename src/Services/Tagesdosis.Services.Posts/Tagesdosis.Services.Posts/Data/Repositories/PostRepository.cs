@@ -13,7 +13,7 @@ public class PostRepository : IPostRepository
         _context = context;
     }
 
-    public async Task<int> CreatePostAsync(Post post)
+    public async Task<int> SavePostAsync(Post post)
     {
         var entry = _context.Posts.Add(post);
         await _context.SaveChangesAsync();

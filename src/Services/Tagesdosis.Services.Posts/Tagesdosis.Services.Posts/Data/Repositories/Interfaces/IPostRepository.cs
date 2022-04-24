@@ -4,5 +4,5 @@ namespace Tagesdosis.Services.Posts.Data.Repositories.Interfaces;
 
 public interface IPostRepository
 {
-    public Task<int> CreatePostAsync(Post post);
+    public Task<int> SavePostAsync(Post post);
 }

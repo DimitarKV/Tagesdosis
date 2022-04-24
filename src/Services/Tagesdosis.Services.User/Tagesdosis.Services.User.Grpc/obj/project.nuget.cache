@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bi4ErQQJmWXN1frTnQEjFmKTW7rAhNYiLKX6jkr2UHGK3+/2hcrwq4wNI4vbamLuLExHts9SIVRPpm9wvrt4eA==",
+  "dgSpecHash": "mAi0XHNuR3WQPs+XxDYwaHLlTyc2nQSS93xqHzBjK0az/DuMWO1Xn8tjCynwBJjn/u3lWHzU3nhlPfBREuVgVQ==",
   "success": true,
-  "projectFilePath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj",
+  "projectFilePath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mitko\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\mitko\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

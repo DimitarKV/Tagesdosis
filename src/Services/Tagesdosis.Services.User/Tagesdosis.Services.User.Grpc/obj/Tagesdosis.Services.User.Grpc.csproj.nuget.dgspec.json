@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj": {}
+    "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj": {}
   },
   "projects": {
-    "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj": {
+    "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj",
+        "projectUniqueName": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj",
         "projectName": "Tagesdosis.Application",
-        "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj",
+        "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj",
         "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-        "outputPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\obj\\",
+        "outputPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +32,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj": {
-                "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj"
+              "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj": {
+                "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj"
               }
             }
           }
@@ -88,6 +92,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -96,17 +103,21 @@
         }
       }
     },
-    "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj": {
+    "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj",
+        "projectUniqueName": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj",
         "projectName": "Tagesdosis.Domain",
-        "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj",
+        "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj",
         "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-        "outputPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\obj\\",
+        "outputPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -160,17 +171,21 @@
         }
       }
     },
-    "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj": {
+    "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj",
+        "projectUniqueName": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj",
         "projectName": "Tagesdosis.Services.User.Grpc",
-        "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj",
+        "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\Tagesdosis.Services.User.Grpc.csproj",
         "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-        "outputPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\obj\\",
+        "outputPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User.Grpc\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -184,11 +199,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj": {
-                "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj"
+              "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj": {
+                "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj"
               },
-              "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj": {
-                "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj"
+              "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj": {
+                "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj"
               }
             }
           }
@@ -238,17 +253,21 @@
         }
       }
     },
-    "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj": {
+    "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj",
+        "projectUniqueName": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj",
         "projectName": "Tagesdosis.Services.User",
-        "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj",
+        "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\Tagesdosis.Services.User.csproj",
         "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-        "outputPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\obj\\",
+        "outputPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Services\\Tagesdosis.Services.User\\Tagesdosis.Services.User\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -262,8 +281,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj": {
-                "projectPath": "E:\\DOTNET\\Internship\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj"
+              "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj": {
+                "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj"
               }
             }
           }
@@ -344,6 +363,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

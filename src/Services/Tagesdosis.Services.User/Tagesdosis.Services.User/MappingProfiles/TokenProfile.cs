@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Tagesdosis.Services.User.Api.DTOs;
 using Tagesdosis.Services.User.Commands.Token.CreateTokenCommand;
-using Tagesdosis.Services.User.DTOs;
 
 namespace Tagesdosis.Services.User.MappingProfiles;
 

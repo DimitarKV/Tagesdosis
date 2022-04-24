@@ -4,10 +4,10 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Tagesdosis.Services.User.Api.DTOs;
 using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
 using Tagesdosis.Services.User.Commands.User.DeleteUserCommand;
 using Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
-using Tagesdosis.Services.User.DTOs;
 
 namespace Tagesdosis.Services.User.Api.Controllers;
 

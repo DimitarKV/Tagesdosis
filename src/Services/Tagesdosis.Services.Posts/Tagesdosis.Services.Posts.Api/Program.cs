@@ -1,5 +1,6 @@
 using Tagesdosis.Application;
 using Tagesdosis.Application.Extensions;
+using Tagesdosis.Services.Posts.Api.Controllers;
 using Tagesdosis.Services.Posts.Data.Entities;
 using Tagesdosis.Services.Posts.Data.Persistance;
 using Tagesdosis.Services.Posts.Data.Persistance.Interfaces;
@@ -17,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.AddPersistence();
-builder.Services.AddApplication(new [] {typeof(Post).Assembly});
+builder.Services.AddApplication(new [] {typeof(Post).Assembly, typeof(PostController).Assembly});
 builder.Services.AddTransient<IPostRepository, PostRepository>();
 builder.Services.AddTransient<IPostDbContext, PostDbContext>();
 builder.AddSecurity();
