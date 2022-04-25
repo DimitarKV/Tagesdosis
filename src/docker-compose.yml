@@ -1,0 +1,19 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: src
+services:
+- name: mssql
+  image: mcr.microsoft.com/mssql/server
+  bindings:
+  - port: 1433
+    containerPort: 1433
+    protocol: http
+  env:
+  - name: SA_PASSWORD
+    value: Tagesdosis123
+  - name: ACCEPT_EULA
+    value: Y
