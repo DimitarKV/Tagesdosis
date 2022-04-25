@@ -1,8 +1,6 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
 using Tagesdosis.Services.User.Commands.User.DeleteUserCommand;
@@ -27,9 +25,8 @@ public class UserController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> RegisterAsync([FromBody] UserCredentialsDTO credentialsDto)
+    public async Task<IActionResult> RegisterAsync([FromBody] CreateUserCommand command)
     {
-        var command = _mapper.Map<CreateUserCommand>(credentialsDto);
         var response = await _mediator.Send(command);
 
         if (response.IsValid)
@@ -39,10 +36,11 @@ public class UserController : ControllerBase
 
     [HttpPut]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand updateUserCommand)
+    public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDTO updateUserDto)
     {
-        updateUserCommand.UserName = User.Identity!.Name!;
-        var response = await _mediator.Send(updateUserCommand);
+        var command = _mapper.Map<UpdateUserCommand>(updateUserDto);
+        command.UserName = User.Identity!.Name!;
+        var response = await _mediator.Send(command);
 
         if (response.IsValid)
             return Ok(response);
