@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Tagesdosis.Services.Posts.Commands.CreatePostCommand;
+using Tagesdosis.Services.Posts.Commands.EditPostCommand;
 using Tagesdosis.Services.Posts.Data.Entities;
 using Tagesdosis.Services.Posts.DTOs;
 
@@ -11,5 +12,6 @@ public class PostProfile : Profile
     {
         CreateMap<CreatePostDTO, CreatePostCommand>();
         CreateMap<CreatePostCommand, Post>();
+        CreateMap<UpdatePostDTO, UpdatePostCommand>();
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tagesdosis.Services.Posts.Commands.CreatePostCommand;
 using Tagesdosis.Services.Posts.Commands.DeletePostCommand;
+using Tagesdosis.Services.Posts.Commands.EditPostCommand;
 using Tagesdosis.Services.Posts.DTOs;
 
 namespace Tagesdosis.Services.Posts.Api.Controllers;
@@ -43,6 +44,20 @@ public class PostController : ControllerBase
         var result = await _mediator.Send(command);
 
         if (result.IsValid)
+            return Ok(result);
+        return BadRequest(result);
+    }
+
+    [HttpPut]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Consumes("application/json")]
+    public async Task<IActionResult> UpdatePost([FromBody] UpdatePostDTO updatePostDto)
+    {
+        var command = _mapper.Map<UpdatePostCommand>(updatePostDto);
+        command.UserName = User.Identity!.Name!;
+        var result = await _mediator.Send(command);
+        
+        if(result.IsValid)
             return Ok(result);
         return BadRequest(result);
     }
