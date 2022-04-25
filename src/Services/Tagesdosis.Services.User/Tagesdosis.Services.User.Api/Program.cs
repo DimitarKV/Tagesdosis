@@ -1,5 +1,7 @@
 using Tagesdosis.Application;
 using Tagesdosis.Application.Extensions;
+using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 using Tagesdosis.Infrastructure.ProtectedStorage.AzureKeyVault;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
@@ -30,6 +32,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var sender = new AzureServiceBusTopicSender<string>("Endpoint=sb://tagesdosis.servicebus.windows.net/;SharedAccessKeyName=ReadWrite;SharedAccessKey=hvkAdmZStj+telkUbag+AidbkV/fCinO0cEbacZIQS0=", "user");
+await sender.SendAsync("Davai blyat", new MessageMetaData
+{
+    CreatedOn = DateTime.Now,
+    UpdatedOn = DateTime.Now
+}, CancellationToken.None);
 /*if (builder.Environment.IsProduction())
 {
     builder.AddAzureKeyVault(new AzureKeyVaultOptions
