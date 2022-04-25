@@ -1,25 +1,22 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Identity;
+using Tagesdosis.Services.User.Views;
 
 namespace Tagesdosis.Services.User.Commands.User.UpdateUserCommand;
 
-public class UpdateUserCommand : IRequest<ApiResponse>
+public class UpdateUserCommand : IRequest<ApiResponse<UserView>>
 {
-    public bool ChangeUsername { get; set; }
     public string UserName { get; set; }
-    public string NewUserName { get; set; }
-    public bool ChangeEmail { get; set; }
-    public string Email { get; set; }
-    public bool ChangePassword { get; set; }
-    public string CurrentPassword { get; set; }
-    public string NewPassword { get; set; }
+    public string? NewUserName { get; set; }
+    public string? Email { get; set; }
+    public string? CurrentPassword { get; set; }
+    public string? NewPassword { get; set; }
 }
 
-public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiResponse>
+public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiResponse<UserView>>
 {
     private readonly IMapper _mapper;
     private readonly IIdentityService _identityService;
@@ -36,41 +33,36 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<ApiResponse> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<UserView>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _identityService.FindByNameAsync(request.UserName);
 
-        if (user is null)
-            return new ApiResponse("An error occurred while updating a user", new[] {"Didn't find user with username " + request.UserName});
-
-        if (request.ChangeUsername)
-            user.UserName = request.NewUserName;
-
-        if (request.ChangeEmail)
-            user.Email = request.Email;
-
-        IdentityResult result = new IdentityResult();
-        if (request.ChangePassword)
+        string messageIfUsernameChanged = "";
+        if (request.NewUserName is not null)
         {
-            result = await _identityService.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+            user!.UserName = request.NewUserName;
+            messageIfUsernameChanged = " Please login again with your new username " + request.NewUserName;
+        }
+
+        if (request.Email is not null)
+            user!.Email = request.Email;
+        
+        if (request.CurrentPassword is not null && request.NewPassword is not null)
+        {
+            var result = await _identityService.ChangePasswordAsync(user!, request.CurrentPassword, request.NewPassword);
             if (!result.Succeeded)
-                return new ApiResponse("An error occurred while updating a user " + request.UserName,
+                return new ApiResponse<UserView>(null, "An error occurred while updating a user " + request.UserName,
                     result.Errors.Select(e => e.Description));
         }
 
-        if (request.ChangeEmail || request.ChangePassword || request.ChangeUsername)
-            user.UpdatedOn = DateTime.Now;
+        user!.UpdatedOn = DateTime.Now;
 
-        result = await _identityService.UpdateAsync(user);
+        var updateResult = await _identityService.UpdateAsync(user);
 
-        string messageIfPasswordChanged = "";
-        if (request.ChangeUsername)
-            messageIfPasswordChanged = " Please login again with your new username " + request.NewUserName;
+        if (updateResult.Succeeded)
+            return new ApiResponse<UserView>(_mapper.Map<UserView>(user), "Successfully updated user " + request.UserName + "." + messageIfUsernameChanged);
 
-        if (result.Succeeded)
-            return new ApiResponse("Successfully updated user " + request.UserName + "." + messageIfPasswordChanged);
-
-        return new ApiResponse("An error occurred while updating a user",
-            result.Errors.Select(x => x.Description));
+        return new ApiResponse<UserView>(null, "An error occurred while updating a user",
+            updateResult.Errors.Select(x => x.Description));
     }
 }
