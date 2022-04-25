@@ -1,11 +1,13 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.Posts.Data.Entities;
 using Tagesdosis.Services.Posts.Data.Repositories.Interfaces;
+using Tagesdosis.Services.Posts.Views;
 
 namespace Tagesdosis.Services.Posts.Commands.EditPostCommand;
 
-public class UpdatePostCommand : IRequest<ApiResponse<Post>>
+public class UpdatePostCommand : IRequest<ApiResponse<PostView>>
 {
     public int? Id { get; set; }
     public string? UserName { get; set; }
@@ -14,16 +16,18 @@ public class UpdatePostCommand : IRequest<ApiResponse<Post>>
     public bool? IsVisible { get; set; }
 }
 
-public class EditPostCommandHandler : IRequestHandler<UpdatePostCommand, ApiResponse<Post>>
+public class EditPostCommandHandler : IRequestHandler<UpdatePostCommand, ApiResponse<PostView>>
 {
     private readonly IPostRepository _repository;
+    private readonly IMapper _mapper;
 
-    public EditPostCommandHandler(IPostRepository repository)
+    public EditPostCommandHandler(IPostRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
-    public async Task<ApiResponse<Post>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<PostView>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
     {
         var post = await _repository.FindByIdAsync(request.Id!.Value);
 
@@ -40,6 +44,8 @@ public class EditPostCommandHandler : IRequestHandler<UpdatePostCommand, ApiResp
 
         var persistenceResult = await _repository.UpdateAsync(post!);
 
-        return new ApiResponse<Post>(post!, "Successfully updated post!");
+        var postView = _mapper.Map<PostView>(persistenceResult);
+        
+        return new ApiResponse<PostView>(postView, "Successfully updated post!");
     }
 }
