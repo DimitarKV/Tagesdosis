@@ -6,6 +6,7 @@ using Tagesdosis.Services.Posts.Commands.CreatePostCommand;
 using Tagesdosis.Services.Posts.Commands.DeletePostCommand;
 using Tagesdosis.Services.Posts.Commands.EditPostCommand;
 using Tagesdosis.Services.Posts.DTOs;
+using Tagesdosis.Services.Posts.Queries.GetPostQuery;
 
 namespace Tagesdosis.Services.Posts.Api.Controllers;
 
@@ -36,14 +37,14 @@ public class PostController : ControllerBase
         return BadRequest(result);
     }
 
-    [HttpDelete("{id}")]
+    [HttpGet("{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public async Task<IActionResult> DeletePost(int id)
+    public async Task<IActionResult> GetPost(int id)
     {
-        var command = new DeletePostCommand {Id = id, UserName = User.Identity!.Name!};
-        var result = await _mediator.Send(command);
-
-        if (result.IsValid)
+        var query = new GetPostQuery() {Id = id, UserName = User.Identity!.Name!};
+        var result = await _mediator.Send(query);
+        
+        if(result.IsValid)
             return Ok(result);
         return BadRequest(result);
     }
@@ -56,8 +57,20 @@ public class PostController : ControllerBase
         var command = _mapper.Map<UpdatePostCommand>(updatePostDto);
         command.UserName = User.Identity!.Name!;
         var result = await _mediator.Send(command);
-        
-        if(result.IsValid)
+
+        if (result.IsValid)
+            return Ok(result);
+        return BadRequest(result);
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public async Task<IActionResult> DeletePost(int id)
+    {
+        var command = new DeletePostCommand {Id = id, UserName = User.Identity!.Name!};
+        var result = await _mediator.Send(command);
+
+        if (result.IsValid)
             return Ok(result);
         return BadRequest(result);
     }
