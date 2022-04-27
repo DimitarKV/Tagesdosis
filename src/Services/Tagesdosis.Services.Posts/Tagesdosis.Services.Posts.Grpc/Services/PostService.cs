@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.Posts.Commands.CreatePostCommand;
+using Tagesdosis.Services.Posts.Commands.DeletePostCommand;
 using Tagesdosis.Services.Posts.Commands.EditPostCommand;
 using Tagesdosis.Services.Posts.Queries.GetPostQuery;
 using Tagesdosis.Services.Posts.Views;
@@ -35,7 +36,7 @@ public class PostService : GrpcPost.GrpcPost.GrpcPostBase
 
         return new CreatePostResponse {ApiResponse = grpcApiResponse, Result = result.Result};
     }
-    
+
     [Authorize(AuthenticationSchemes = "Bearer")]
     public override async Task<GetPostResponse> GetPost(GetPostRequest request, ServerCallContext context)
     {
@@ -48,7 +49,7 @@ public class PostService : GrpcPost.GrpcPost.GrpcPostBase
 
         return new GetPostResponse {ApiResponse = grpcApiResponse, PostView = grpcPostView};
     }
-    
+
     [Authorize(AuthenticationSchemes = "Bearer")]
     public override async Task<UpdatePostResponse> UpdatePost(UpdatePostRequest request, ServerCallContext context)
     {
@@ -65,8 +66,14 @@ public class PostService : GrpcPost.GrpcPost.GrpcPostBase
         return postResponse;
     }
 
-    public override Task<DeletePostResponse> DeletePost(DeletePostRequest request, ServerCallContext context)
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public override async Task<DeletePostResponse> DeletePost(DeletePostRequest request, ServerCallContext context)
     {
-        return base.DeletePost(request, context);
+        var command = new DeletePostCommand
+            {Id = request.Id, UserName = _httpContextAccessor.HttpContext!.User.Identity!.Name!};
+
+        var result = await _mediator.Send(command);
+
+        return new DeletePostResponse {ApiResponse = _mapper.Map<GrpcApiResponse>(result)};
     }
 }

@@ -24,5 +24,6 @@ public class PostProfile : Profile
         CreateMap<ApiResponse<PostView>, GrpcApiResponse>();
         CreateMap<PostView, GrpcPostView>();
         CreateMap<UpdatePostRequest, UpdatePostCommand>();
+        CreateMap<ApiResponse, GrpcApiResponse>();
     }
 }
