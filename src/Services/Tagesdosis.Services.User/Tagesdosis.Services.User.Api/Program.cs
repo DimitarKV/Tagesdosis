@@ -1,6 +1,7 @@
 using Tagesdosis.Application;
 using Tagesdosis.Application.Extensions;
 using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Domain.Extensions;
 using Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;

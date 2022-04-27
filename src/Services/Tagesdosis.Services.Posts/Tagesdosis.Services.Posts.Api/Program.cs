@@ -6,8 +6,8 @@ using Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 using Tagesdosis.Infrastructure.MessageBrokers.Extensions;
 using Tagesdosis.Services.Posts.Api.Controllers;
 using Tagesdosis.Services.Posts.Data.Entities;
-using Tagesdosis.Services.Posts.Data.Persistance;
-using Tagesdosis.Services.Posts.Data.Persistance.Interfaces;
+using Tagesdosis.Services.Posts.Data.Persistence;
+using Tagesdosis.Services.Posts.Data.Persistence.Interfaces;
 using Tagesdosis.Services.Posts.Data.Repositories;
 using Tagesdosis.Services.Posts.Data.Repositories.Interfaces;
 using Tagesdosis.Services.Posts.EventHandlers;
@@ -33,13 +33,6 @@ builder.AddAzureServiceBusReceivers();
 
 var app = builder.Build();
 app.UseAzureServiceBusReceivers();
-
-var sender = new AzureServiceBusTopicSender<UserUpdatedEvent>(
-    builder.Configuration["AzureServiceBus:ConnectionString"], "user");
-await sender.SendAsync(new UserUpdatedEvent
-{
-    Message = "Ey blyaat"
-}, new MessageMetaData(), CancellationToken.None);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
