@@ -1,8 +1,6 @@
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Tagesdosis.Domain.Types;
-using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.DTOs;
 using Tagesdosis.Services.User.Identity;
 

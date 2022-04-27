@@ -37,6 +37,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
  
                 return invalidResponse!;
             }
+            return Activator.CreateInstance(typeof(ApiResponse), "Invalid state of the data", failures.Select(s => s.ErrorMessage).ToList()) as TResponse;
         }
 
         return await next();
