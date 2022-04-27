@@ -9,7 +9,7 @@ using Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 
 namespace Tagesdosis.Infrastructure.MessageBrokers.Extensions;
 
-public static class AzureServiceBusExtensions
+public static class AzureServiceBusReceiverExtensions
 {
     private static IServiceProvider Provider { get; set; }
     
@@ -18,7 +18,7 @@ public static class AzureServiceBusExtensions
         var services = builder.Services;
         var configuration = builder.Configuration;
 
-        var method = typeof(AzureServiceBusExtensions).GetMethod(nameof(CreateInstance), BindingFlags.Static | BindingFlags.NonPublic);
+        var method = typeof(AzureServiceBusReceiverExtensions).GetMethod(nameof(CreateInstance), BindingFlags.Static | BindingFlags.NonPublic);
 
         foreach (var type in DomainEventExtensions.Handlers)
         {

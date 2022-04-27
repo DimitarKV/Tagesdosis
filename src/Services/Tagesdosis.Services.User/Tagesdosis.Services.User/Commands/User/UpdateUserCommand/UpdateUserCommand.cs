@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Configuration;
+using Tagesdosis.Application.Infrastructure.MessageBrokers;
 using Tagesdosis.Domain.Types;
+using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Identity;
 using Tagesdosis.Services.User.Views;
@@ -20,11 +23,15 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
 {
     private readonly IMapper _mapper;
     private readonly IIdentityService _identityService;
+    private readonly IMessageSenderFactory _senderFactory;
+    private readonly IConfiguration _configuration;
 
-    public UpdateUserCommandHandler(IMapper mapper, IIdentityService identityService)
+    public UpdateUserCommandHandler(IMapper mapper, IIdentityService identityService, IMessageSenderFactory senderFactory, IConfiguration configuration)
     {
         _mapper = mapper;
         _identityService = identityService;
+        _senderFactory = senderFactory;
+        _configuration = configuration;
     }
 
     /// <summary>
@@ -60,9 +67,27 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
         var updateResult = await _identityService.UpdateAsync(user);
 
         if (updateResult.Succeeded)
-            return new ApiResponse<UserView>(_mapper.Map<UserView>(user), "Successfully updated user " + request.UserName + "." + messageIfUsernameChanged);
+        {
+            if (request.NewUserName is not null)
+            {
+                SendNotificationAsync(user.Id, request.NewUserName);
+            }
+            
+            return new ApiResponse<UserView>(_mapper.Map<UserView>(user), $"Successfully updated user {request.UserName}.{messageIfUsernameChanged}");
+        }
 
         return new ApiResponse<UserView>(null, "An error occurred while updating a user",
             updateResult.Errors.Select(x => x.Description));
+    }
+    
+    private async void SendNotificationAsync(string id, string userName)
+    {
+        var @event = new UserCreatedEvent(id, userName);
+        var sender = _senderFactory.CreateAzureTopicSender<UserCreatedEvent>(_configuration["AzureServiceBus:Topics:User"]);
+        await sender.SendAsync(@event, new MessageMetaData
+        {
+            CreatedOn = DateTime.Now,
+            UpdatedOn = DateTime.Now
+        }, CancellationToken.None);
     }
 }

@@ -18,7 +18,7 @@ public class DeleteUserTests : UserTestsBase
         await CreateUserAsync(userName, password);
         
         var command = new DeleteUserCommand(userName);
-        var handler = new DeleteUserCommandHandler(IdentityService);
+        var handler = new DeleteUserCommandHandler(IdentityService, null, null);
         var validator = new DeleteUserCommandValidator(IdentityService);
 
         Assert.True((await validator.ValidateAsync(command)).IsValid);
@@ -36,7 +36,7 @@ public class DeleteUserTests : UserTestsBase
         await InMemory.DbContext.Database.EnsureCreatedAsync();
         
         var command = new DeleteUserCommand(userName);
-        var handler = new DeleteUserCommandHandler(IdentityService);
+        var handler = new DeleteUserCommandHandler(IdentityService, null, null);
         var validator = new DeleteUserCommandValidator(IdentityService);
 
         bool valid = (await validator.ValidateAsync(command)).IsValid;

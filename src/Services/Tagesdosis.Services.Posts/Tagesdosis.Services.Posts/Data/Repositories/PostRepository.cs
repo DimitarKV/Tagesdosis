@@ -1,5 +1,5 @@
 ﻿using Tagesdosis.Services.Posts.Data.Entities;
-using Tagesdosis.Services.Posts.Data.Persistance.Interfaces;
+using Tagesdosis.Services.Posts.Data.Persistence.Interfaces;
 using Tagesdosis.Services.Posts.Data.Repositories.Interfaces;
 
 namespace Tagesdosis.Services.Posts.Data.Repositories;
