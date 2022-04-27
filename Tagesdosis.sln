@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Services.Posts",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Services.Posts.Api", "src\Services\Tagesdosis.Services.Posts\Tagesdosis.Services.Posts.Api\Tagesdosis.Services.Posts.Api.csproj", "{D2C2B351-E6AD-4AB9-B3BD-DCE1778CE3AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Services.Posts.Grpc", "src\Services\Tagesdosis.Services.Posts\Tagesdosis.Services.Posts.Grpc\Tagesdosis.Services.Posts.Grpc.csproj", "{52896ED2-98A8-45F0-AAC2-C70EDAAA10FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,7 @@ Global
 		{6ECA02E4-CFC4-422D-9ABA-C615C3F36991} = {2B541FDD-DEC9-475E-980A-A4235DCC3729}
 		{A70F3EA4-DF49-41DD-9011-38B66EB90E64} = {6ECA02E4-CFC4-422D-9ABA-C615C3F36991}
 		{D2C2B351-E6AD-4AB9-B3BD-DCE1778CE3AB} = {6ECA02E4-CFC4-422D-9ABA-C615C3F36991}
+		{52896ED2-98A8-45F0-AAC2-C70EDAAA10FD} = {6ECA02E4-CFC4-422D-9ABA-C615C3F36991}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{62773336-7E3C-4F5F-85B9-DC60DB977E4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -110,5 +113,9 @@ Global
 		{D2C2B351-E6AD-4AB9-B3BD-DCE1778CE3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2C2B351-E6AD-4AB9-B3BD-DCE1778CE3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2C2B351-E6AD-4AB9-B3BD-DCE1778CE3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52896ED2-98A8-45F0-AAC2-C70EDAAA10FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52896ED2-98A8-45F0-AAC2-C70EDAAA10FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52896ED2-98A8-45F0-AAC2-C70EDAAA10FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52896ED2-98A8-45F0-AAC2-C70EDAAA10FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
