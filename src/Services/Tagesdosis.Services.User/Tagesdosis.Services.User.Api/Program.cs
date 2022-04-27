@@ -1,4 +1,5 @@
 using Tagesdosis.Application;
+using Tagesdosis.Application.Extensions;
 using Tagesdosis.Infrastructure.ProtectedStorage.AzureKeyVault;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
@@ -43,6 +44,5 @@ if (app.Environment.IsDevelopment())
 app.EnsureDatabaseCreated();
 app.UseSecurity();
 app.MapControllers();
-
 
 app.Run();

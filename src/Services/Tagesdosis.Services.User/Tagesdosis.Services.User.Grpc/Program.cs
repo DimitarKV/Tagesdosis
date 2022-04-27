@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Tagesdosis.Application;
+using Tagesdosis.Application.Extensions;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
 using Tagesdosis.Services.User.Grpc.Services;
@@ -15,7 +14,7 @@ builder.Services.AddGrpc();
 builder.AddPersistence();
 
 // MediatR and FluentValidation pipeline configuration
-builder.Services.AddApplication(new [] {typeof(AppUser).Assembly, typeof(TokenService).Assembly});
+builder.Services.AddApplication(new[] { typeof(AppUser).Assembly, typeof(TokenService).Assembly });
 builder.Services.AddTransient<IIdentityService, IdentityService>();
 
 // Identity and security

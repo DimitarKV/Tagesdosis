@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Tagesdosis.Services.User.Extensions;
+namespace Tagesdosis.Application.Extensions;
 
 public static class SecurityExtensions
 {
