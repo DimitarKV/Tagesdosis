@@ -1,6 +1,7 @@
 using Tagesdosis.Application;
 using Tagesdosis.Application.Extensions;
-using Tagesdosis.Infrastructure.ProtectedStorage.AzureKeyVault;
+using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
 using Tagesdosis.Services.User.Identity;
@@ -30,6 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 /*if (builder.Environment.IsProduction())
 {
     builder.AddAzureKeyVault(new AzureKeyVaultOptions
