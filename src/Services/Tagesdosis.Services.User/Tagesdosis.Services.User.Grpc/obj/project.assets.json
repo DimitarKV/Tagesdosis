@@ -1249,6 +1249,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.4",
           "Microsoft.EntityFrameworkCore": "6.0.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4",
+          "Tagesdosis.Application": "1.0.0",
           "Tagesdosis.Domain": "1.0.0"
         },
         "compile": {

@@ -281,6 +281,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj": {
+                "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Application\\Tagesdosis.Application.csproj"
+              },
               "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj": {
                 "projectPath": "D:\\DOTNET\\Intern\\Tagesdosis\\src\\Common\\Tagesdosis.Domain\\Tagesdosis.Domain.csproj"
               }

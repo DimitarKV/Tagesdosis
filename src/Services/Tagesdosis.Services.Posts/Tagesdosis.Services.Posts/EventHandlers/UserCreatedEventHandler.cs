@@ -38,6 +38,6 @@ public class UserCreatedEventHandler : IDomainEventHandler<UserCreatedEvent>
             CreatedOn = DateTime.Now,
             UpdatedOn = DateTime.Now
         };
-        await repository.SaveAuthorAsync(author);
+        await repository!.SaveAuthorAsync(author);
     }
 }

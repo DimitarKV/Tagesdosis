@@ -28,11 +28,6 @@ public class AuthorRepository : IAuthorRepository
         return post;
     }
 
-    public Task<Author> UpdateAsync(Post post)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<Author> UpdateAsync(Author author)
     {
         author = _context.Authors!.Update(author).Entity;
