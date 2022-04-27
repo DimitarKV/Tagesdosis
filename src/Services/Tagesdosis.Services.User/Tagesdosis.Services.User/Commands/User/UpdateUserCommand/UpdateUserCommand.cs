@@ -70,7 +70,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
         {
             if (request.NewUserName is not null)
             {
-                await SendNotificationAsync(user.Id, request.NewUserName);
+                SendNotificationAsync(user.Id, request.NewUserName);
             }
             
             return new ApiResponse<UserView>(_mapper.Map<UserView>(user), $"Successfully updated user {request.UserName}.{messageIfUsernameChanged}");
@@ -80,7 +80,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ApiRe
             updateResult.Errors.Select(x => x.Description));
     }
     
-    private async Task SendNotificationAsync(string id, string userName)
+    private async void SendNotificationAsync(string id, string userName)
     {
         var @event = new UserCreatedEvent(id, userName);
         var sender = _senderFactory.CreateAzureTopicSender<UserCreatedEvent>(_configuration["AzureServiceBus:Topics:User"]);

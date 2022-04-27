@@ -66,7 +66,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
 
         if (result.Succeeded)
         {
-            await SendNotificationAsync(user.Id, user.UserName);
+            SendNotificationAsync(user.Id, user.UserName);
             return new ApiResponse("Successfully created a user");
         }
 
@@ -74,7 +74,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
             result.Errors.Select(x => x.Description));
     }
 
-    private async Task SendNotificationAsync(string id, string userName)
+    private async void SendNotificationAsync(string id, string userName)
     {
         var @event = new UserCreatedEvent(id, userName);
         var sender = _senderFactory.CreateAzureTopicSender<UserCreatedEvent>(_configuration["AzureServiceBus:Topics:User"]);

@@ -50,13 +50,13 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ApiRe
         var result = await _identityService.DeleteAsync(user!);
         if (result.Succeeded)
         {
-            await SendNotificationAsync(user!.Id);
+            SendNotificationAsync(user!.Id);
             return new ApiResponse("Deleted user " + request.UserName);
         }
         return new ApiResponse("Unable to delete user with username " + request.UserName);
     }
     
-    private async Task SendNotificationAsync(string id)
+    private async void SendNotificationAsync(string id)
     {
         var @event = new UserDeletedEvent(id);
         var sender = _senderFactory.CreateAzureTopicSender<UserDeletedEvent>(_configuration["AzureServiceBus:Topics:User"]);
