@@ -2,10 +2,12 @@ using System.Text;
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Domain.Events;
 
 namespace Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 
-public class AzureServiceBusSender<T> : IMessageSender<T>
+public class AzureServiceBusSender<T> : IMessageSender<T> 
+    where T : IDomainEvent
 {
     private readonly string _connectionString;
     private readonly string _queueName;
@@ -21,6 +23,7 @@ public class AzureServiceBusSender<T> : IMessageSender<T>
         var client = new ServiceBusClient(_connectionString);
         var sender = client.CreateSender(_queueName);
 
+        message.Type = typeof(T).Name;
         var json = JsonSerializer.Serialize(new Message<T>
         {
             Data = message,

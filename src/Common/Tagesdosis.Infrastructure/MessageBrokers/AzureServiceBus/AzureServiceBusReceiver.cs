@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Domain.Events;
 
 namespace Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 
@@ -12,6 +13,7 @@ public class AzureServiceBusMessageReceivedArgs<T> : EventArgs
 }
 
 public class AzureServiceBusReceiver<T> : IMessageReceiver
+    where T : IDomainEvent
 {
     private readonly string _connectionString;
     protected readonly string _queueName;
@@ -36,7 +38,8 @@ public class AzureServiceBusReceiver<T> : IMessageReceiver
         return ReceiveStringAsync(retrievedMessage =>
         {
             var message = JsonSerializer.Deserialize<Message<T>>(retrievedMessage);
-            action?.Invoke(message!.Data, message.MetaData);
+            if (message is not null && message.Data.Type == typeof(T).Name)
+                action.Invoke(message!.Data, message.MetaData);
         });
     }
 

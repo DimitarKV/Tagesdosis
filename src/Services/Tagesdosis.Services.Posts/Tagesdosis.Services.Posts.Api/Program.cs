@@ -34,9 +34,9 @@ builder.AddAzureServiceBusReceivers();
 var app = builder.Build();
 app.UseAzureServiceBusReceivers();
 
-var sender = new AzureServiceBusTopicSender<UserCreatedEvent>(
+var sender = new AzureServiceBusTopicSender<UserUpdatedEvent>(
     builder.Configuration["AzureServiceBus:ConnectionString"], "user");
-await sender.SendAsync(new UserCreatedEvent
+await sender.SendAsync(new UserUpdatedEvent
 {
     Message = "Ey blyaat"
 }, new MessageMetaData(), CancellationToken.None);

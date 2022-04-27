@@ -32,12 +32,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var sender = new AzureServiceBusTopicSender<string>("Endpoint=sb://tagesdosis.servicebus.windows.net/;SharedAccessKeyName=ReadWrite;SharedAccessKey=hvkAdmZStj+telkUbag+AidbkV/fCinO0cEbacZIQS0=", "user");
-await sender.SendAsync("test message", new MessageMetaData
-{
-    CreatedOn = DateTime.Now,
-    UpdatedOn = DateTime.Now
-}, CancellationToken.None);
 /*if (builder.Environment.IsProduction())
 {
     builder.AddAzureKeyVault(new AzureKeyVaultOptions

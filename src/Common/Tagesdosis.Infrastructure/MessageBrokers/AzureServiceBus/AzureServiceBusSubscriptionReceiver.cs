@@ -1,9 +1,11 @@
 using Azure.Messaging.ServiceBus;
 using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Domain.Events;
 
 namespace Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 
 public class AzureServiceBusSubscriptionReceiver<T> : AzureServiceBusReceiver<T>
+    where T : IDomainEvent
 {
     private readonly string _subscriptionName;
 
