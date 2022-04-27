@@ -16,7 +16,7 @@ public class CreateUserTests : UserTestsBase
         await InMemory.DbContext.Database.EnsureCreatedAsync();
         
         var command = new CreateUserCommand(userName, email, password);
-        var handler = new CreateUserCommandHandler(Mapper, IdentityService);
+        var handler = new CreateUserCommandHandler(Mapper, IdentityService, null, null);
         var validator = new CreateUserCommandValidator(IdentityService);
 
         Assert.True((await validator.ValidateAsync(command)).IsValid);
@@ -36,7 +36,7 @@ public class CreateUserTests : UserTestsBase
         await InMemory.DbContext.Database.EnsureCreatedAsync();
         
         var command = new CreateUserCommand(userName, email, password);
-        var handler = new CreateUserCommandHandler(Mapper, IdentityService);
+        var handler = new CreateUserCommandHandler(Mapper, IdentityService, null, null);
         var validator = new CreateUserCommandValidator(IdentityService);
 
         Assert.True((await validator.ValidateAsync(command)).IsValid);
