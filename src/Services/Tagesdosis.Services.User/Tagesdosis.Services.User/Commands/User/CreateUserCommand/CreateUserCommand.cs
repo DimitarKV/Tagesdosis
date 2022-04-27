@@ -66,4 +66,10 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
         return new ApiResponse("An error occurred while creating a user",
             result.Errors.Select(x => x.Description));
     }
+
+    private async Task SendNotificationAsync(string id, string userName)
+    {
+        var @event = new UserCreatedEvent(id, userName);
+        //var sender = 
+    }
 }   

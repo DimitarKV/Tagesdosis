@@ -1,13 +1,13 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Tagesdosis.Application;
 using Tagesdosis.Application.Extensions;
-using Tagesdosis.Services.Posts.Data.Persistance;
-using Tagesdosis.Services.Posts.Data.Persistance.Interfaces;
 using Tagesdosis.Services.Posts.Data.Repositories;
 using Tagesdosis.Services.Posts.Data.Repositories.Interfaces;
 using Tagesdosis.Services.Posts.Extensions;
 using Tagesdosis.Services.Posts.Grpc.Services;
 using Tagesdosis.Services.Posts.Data.Entities;
+using Tagesdosis.Services.Posts.Data.Persistence;
+using Tagesdosis.Services.Posts.Data.Persistence.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

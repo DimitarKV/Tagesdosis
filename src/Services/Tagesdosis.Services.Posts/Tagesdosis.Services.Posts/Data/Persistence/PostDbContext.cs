@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tagesdosis.Services.Posts.Data.Entities;
-using Tagesdosis.Services.Posts.Data.Persistance.Interfaces;
+using Tagesdosis.Services.Posts.Data.Persistence.Interfaces;
 
-namespace Tagesdosis.Services.Posts.Data.Persistance;
+namespace Tagesdosis.Services.Posts.Data.Persistence;
 
 public class PostDbContext : DbContext, IPostDbContext
 {
