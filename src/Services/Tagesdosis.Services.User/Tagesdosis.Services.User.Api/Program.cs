@@ -1,6 +1,7 @@
 using Tagesdosis.Application;
 using Tagesdosis.Application.Extensions;
 using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Infrastructure.MessageBrokers;
 using Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
@@ -19,6 +20,11 @@ builder.AddPersistence();
 // MediatR and FluentValidation pipeline configuration
 builder.Services.AddApplication(new [] {typeof(AppUser).Assembly});
 builder.Services.AddTransient<IIdentityService, IdentityService>();
+builder.Services.AddTransient<IMessageSenderFactory, MessageSenderFactory>(factory =>
+{
+    var connectionString = builder.Configuration["AzureServiceBus:ConnectionString"];
+    return new MessageSenderFactory(connectionString);
+});
 
 // Identity and security
 builder.Services.AddIdentity();
