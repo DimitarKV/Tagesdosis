@@ -1,7 +1,7 @@
-﻿using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Tagesdosis.Application.Infrastructure.MessageBrokers;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.User.Authorization;
 using Tagesdosis.Services.User.Data.Entities;
@@ -32,11 +32,15 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
 {
     private readonly IMapper _mapper;
     private readonly IIdentityService _identityService;
+    private readonly IMessageSenderFactory _senderFactory;
+    private readonly IConfiguration _configuration;
 
-    public CreateUserCommandHandler(IMapper mapper, IIdentityService identityService)
+    public CreateUserCommandHandler(IMapper mapper, IIdentityService identityService, IMessageSenderFactory senderFactory, IConfiguration configuration)
     {
         _mapper = mapper;
         _identityService = identityService;
+        _senderFactory = senderFactory;
+        _configuration = configuration;
     }
     
     /// <summary>
@@ -59,9 +63,12 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
                 result.Errors.Select(x => x.Description));
         
         await _identityService.AddClaimAsync(user, Claims.User);
-        
+
         if (result.Succeeded)
+        {
+            await SendNotificationAsync(user.Id, user.UserName);
             return new ApiResponse("Successfully created a user");
+        }
 
         return new ApiResponse("An error occurred while creating a user",
             result.Errors.Select(x => x.Description));
@@ -70,6 +77,11 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ApiRe
     private async Task SendNotificationAsync(string id, string userName)
     {
         var @event = new UserCreatedEvent(id, userName);
-        //var sender = 
+        var sender = _senderFactory.CreateAzureTopicSender<UserCreatedEvent>(_configuration["AzureServiceBus:Topics:User"]);
+        await sender.SendAsync(@event, new MessageMetaData
+        {
+            CreatedOn = DateTime.Now,
+            UpdatedOn = DateTime.Now
+        }, CancellationToken.None);
     }
 }   

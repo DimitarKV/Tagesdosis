@@ -1,7 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Tagesdosis.Application.Infrastructure.MessageBrokers;
 using Tagesdosis.Domain.Types;
+using Tagesdosis.Services.User.Commands.User.CreateUserCommand;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Identity;
 
@@ -25,10 +28,14 @@ public class DeleteUserCommand : IRequest<ApiResponse>
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ApiResponse>
 {
     private readonly IIdentityService _identityService;
+    private readonly IMessageSenderFactory _senderFactory;
+    private readonly IConfiguration _configuration;
 
-    public DeleteUserCommandHandler(IIdentityService identityService)
+    public DeleteUserCommandHandler(IIdentityService identityService, IMessageSenderFactory senderFactory, IConfiguration configuration)
     {
         _identityService = identityService;
+        _senderFactory = senderFactory;
+        _configuration = configuration;
     }
 
     /// <summary>
@@ -42,7 +49,21 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ApiRe
         var user = await _identityService.FindByNameAsync(request.UserName);
         var result = await _identityService.DeleteAsync(user!);
         if (result.Succeeded)
+        {
+            await SendNotificationAsync(user!.Id);
             return new ApiResponse("Deleted user " + request.UserName);
+        }
         return new ApiResponse("Unable to delete user with username " + request.UserName);
+    }
+    
+    private async Task SendNotificationAsync(string id)
+    {
+        var @event = new UserDeletedEvent(id);
+        var sender = _senderFactory.CreateAzureTopicSender<UserDeletedEvent>(_configuration["AzureServiceBus:Topics:User"]);
+        await sender.SendAsync(@event, new MessageMetaData
+        {
+            CreatedOn = DateTime.Now,
+            UpdatedOn = DateTime.Now
+        }, CancellationToken.None);
     }
 }

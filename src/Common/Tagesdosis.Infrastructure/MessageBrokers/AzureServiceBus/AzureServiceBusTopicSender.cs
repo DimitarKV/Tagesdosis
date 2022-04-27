@@ -9,21 +9,17 @@ namespace Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
 public class AzureServiceBusTopicSender<T> : IMessageSender<T>
     where T : IDomainEvent
 {
-    private readonly string _connectionString;
+    private readonly ServiceBusSender _sender;
     private readonly string _topicName;
     
-    public AzureServiceBusTopicSender(string connectionString, string topicName)
+    public AzureServiceBusTopicSender(ServiceBusSender sender, string topicName)
     {
-        _connectionString = connectionString;
+        _sender = sender;
         _topicName = topicName;
-        
     }
     
     public async Task SendAsync(T message, MessageMetaData metaData, CancellationToken cancellationToken)
     {
-        var client = new ServiceBusClient(_connectionString);
-        var sender = client.CreateSender(_topicName);
-        
         message.Type = typeof(T).Name;
         var serviceBusMessage = new ServiceBusMessage(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new Message<T>
         {
@@ -31,6 +27,6 @@ public class AzureServiceBusTopicSender<T> : IMessageSender<T>
             MetaData = metaData
         })));
 
-        await sender.SendMessageAsync(serviceBusMessage, cancellationToken);
+        await _sender.SendMessageAsync(serviceBusMessage, cancellationToken);
     }
 }
