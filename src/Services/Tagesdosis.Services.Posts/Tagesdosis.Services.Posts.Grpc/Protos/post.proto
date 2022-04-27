@@ -40,6 +40,7 @@ message GrpcPostView {
   string content = 4;
   string createdOn = 5;
   string updatedOn = 6;
+  bool isVisible = 7;
 }
 
 message GetPostResponse {

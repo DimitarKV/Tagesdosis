@@ -2,6 +2,7 @@
 using GrpcPost;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Services.Posts.Commands.CreatePostCommand;
+using Tagesdosis.Services.Posts.Commands.EditPostCommand;
 using Tagesdosis.Services.Posts.Data.Entities;
 using Tagesdosis.Services.Posts.Queries.GetPostQuery;
 using Tagesdosis.Services.Posts.Views;
@@ -20,5 +21,9 @@ public class PostProfile : Profile
             .ForMember(d => d.Owner, o => o.MapFrom(s => s.UserName));
         CreateMap<ApiResponse<PostView>, GrpcApiResponse>();
         CreateMap<PostView, GrpcPostView>();
+        CreateMap<ApiResponse<PostView>, GrpcApiResponse>();
+        CreateMap<PostView, GrpcPostView>();
+        CreateMap<UpdatePostRequest, UpdatePostCommand>();
+        CreateMap<ApiResponse, GrpcApiResponse>();
     }
 }
