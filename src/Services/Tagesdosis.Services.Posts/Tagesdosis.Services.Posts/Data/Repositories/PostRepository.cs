@@ -21,15 +21,22 @@ public class PostRepository : IPostRepository
         return entry.Entity.Id;
     }
 
-    public async Task<Post> FindByIdAsync(int id)
+    public async Task<Post?> FindByIdAsync(int id)
     {
-        Post post = await _context.Posts!.FindAsync(id);
+        var post = await _context.Posts!.FindAsync(id);
+        return post;
+    }
+
+    public async Task<Post> UpdateAsync(Post post)
+    {
+        post = _context.Posts!.Update(post).Entity;
+        await _context.SaveChangesAsync();
         return post;
     }
 
     public async Task DeletePostAsync(int id)
     {
-        _context.Posts.Remove(await FindByIdAsync(id));
-        _context.SaveChanges();
+        _context.Posts!.Remove((await FindByIdAsync(id))!);
+        await _context.SaveChangesAsync();
     }
 }
