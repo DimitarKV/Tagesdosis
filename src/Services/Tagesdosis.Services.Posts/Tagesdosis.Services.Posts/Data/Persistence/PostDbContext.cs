@@ -8,6 +8,7 @@ public class PostDbContext : DbContext, IPostDbContext
 {
 
     public DbSet<Post>? Posts { get; set; }
+    public DbSet<Author>? Authors { get; set; }
 
     public PostDbContext()
     {

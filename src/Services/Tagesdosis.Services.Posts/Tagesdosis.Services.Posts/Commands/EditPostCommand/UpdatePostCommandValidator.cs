@@ -60,7 +60,7 @@ public class UpdatePostCommandValidator : AbstractValidator<UpdatePostCommand>
                 if (post is null)
                     return true;
 
-                if (post.UserName != cmd.UserName)
+                if (post.Author.UserName != cmd.UserName)
                     return false;
                     
                 return true;

@@ -25,6 +25,7 @@ builder.Services.AddSwaggerGen();
 builder.AddPersistence();
 builder.Services.AddApplication(new [] {typeof(Post).Assembly, typeof(PostController).Assembly});
 builder.Services.AddTransient<IPostRepository, PostRepository>();
+builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
 builder.Services.AddTransient<IPostDbContext, PostDbContext>();
 builder.AddSecurity();
 
