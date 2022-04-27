@@ -18,11 +18,10 @@ public static class DomainEventExtensions
 
         foreach (var handler in Handlers)
         {
-            var interfaces = handler.GetInterfaces()
-                .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>))
-                .ToList();
-            var type = interfaces[0];
-            
+            var type = handler
+                .GetInterfaces()
+                .Single(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>));
+
             services.AddTransient(type, handler);
         }
     }
