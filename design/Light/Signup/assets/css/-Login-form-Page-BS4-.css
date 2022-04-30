@@ -2,7 +2,7 @@
   min-height: 100vh;
 }
 
-#login-block {
+#signup-block {
   -webkit-box-shadow: 0px 0px 45px 0px rgba(0,0,0,0.4);
   -moz-box-shadow: 0px 0px 45px 0px rgba(0,0,0,0.4);
   box-shadow: 0px 0px 45px 0px rgba(0,0,0,0.4);
@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 991.98px) {
-  #login-block {
+  #signup-block {
     opacity: .95;
   }
 }
