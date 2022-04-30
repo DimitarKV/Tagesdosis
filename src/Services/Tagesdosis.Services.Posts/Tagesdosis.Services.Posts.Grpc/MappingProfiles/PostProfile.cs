@@ -18,7 +18,7 @@ public class PostProfile : Profile
         CreateMap<GetPostRequest, GetPostQuery>();
         CreateMap<CreatePostCommand, Post>();
         CreateMap<Post, PostView>()
-            .ForMember(d => d.Owner, o => o.MapFrom(s => s.UserName));
+            .ForMember(d => d.Owner, o => o.MapFrom(s => s.Author.UserName));
         CreateMap<ApiResponse<PostView>, GrpcApiResponse>();
         CreateMap<PostView, GrpcPostView>();
         CreateMap<ApiResponse<PostView>, GrpcApiResponse>();

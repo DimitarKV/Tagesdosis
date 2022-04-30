@@ -15,7 +15,7 @@ public class PostProfile : Profile
         CreateMap<CreatePostCommand, Post>();
         CreateMap<UpdatePostDTO, UpdatePostCommand>();
         CreateMap<Post, PostView>()
-            .ForMember(d => d.Owner, o => o.MapFrom(s => s.UserName));
+            .ForMember(d => d.Owner, o => o.MapFrom(s => s.Author.UserName));
 
     }
 }

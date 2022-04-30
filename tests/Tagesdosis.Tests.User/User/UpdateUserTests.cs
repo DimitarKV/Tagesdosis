@@ -23,7 +23,7 @@ public class UpdateUserTests : UserTestsBase
             CurrentPassword = password,
             NewUserName = newUserName
         };
-        var handler = new UpdateUserCommandHandler(Mapper, IdentityService);
+        var handler = new UpdateUserCommandHandler(Mapper, IdentityService, null, null);
         var validator = new UpdateUserCommandValidator(IdentityService);
 
         Assert.True((await validator.ValidateAsync(command)).IsValid);
@@ -45,7 +45,7 @@ public class UpdateUserTests : UserTestsBase
             CurrentPassword = password,
             NewUserName = newUserName
         };
-        var handler = new UpdateUserCommandHandler(Mapper, IdentityService);
+        var handler = new UpdateUserCommandHandler(Mapper, IdentityService, null, null);
         var validator = new UpdateUserCommandValidator(IdentityService);
 
         Assert.True((await validator.ValidateAsync(command)).IsValid);
