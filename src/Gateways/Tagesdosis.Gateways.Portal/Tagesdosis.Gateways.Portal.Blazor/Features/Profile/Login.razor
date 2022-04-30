@@ -1,0 +1,83 @@
+@page "/profile/login"
+@using Tagesdosis.Gateways.Portal.Services.User
+@using Tagesdosis.Gateways.Portal.Blazor.Providers
+@using Tagesdosis.Gateways.Portal.Blazor.Extensions
+@inject IUserService _userService
+@inject NavigationManager NavigationManager
+@inject TokenAuthenticationStateProvider StateProvider
+
+<div class="container-fluid">
+  <div class="row mh-100vh">
+    <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch p-5 rounded rounded-lg-0 my-5 my-lg-0 box-style" id="login-block">
+        <div class="m-auto w-lg-75 w-xl-50">
+            <h2 class="fw-light mb-5 intro-text">
+                <img class="logo">&nbsp; <strong>
+                    <em>Tagesdosis</em>
+                </strong>
+            </h2>
+            <form>
+                <div class="form-group mb-3">
+                    <label class="form-label text-secondary">Username</label>
+                    <input class="form-control" type="text" inputmode="email" @bind="_username">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label text-secondary">Password</label>
+                    <input class="form-control" type="password" @bind="_password">
+                </div>
+            </form>
+            <br/>
+            <button class="btn btn-info mt-2 btn-style" @onclick="OnLoginButton_Clicked">Log In</button>
+            <p class="mt-3 mb-0 error-text">
+                @Message
+            </p>
+            <p class="mt-3 mb-0 info-text">
+                <a class="info-text small" href="#">Don't have an account? Sign up!</a>
+                <br/>
+                <a class="info-text small" href="#">Forgot your password?</a>
+                <br/>
+            </p>
+
+        </div>
+    </div>
+
+    <Background/>
+  </div>
+</div>
+
+@code {
+    private string _username;
+    private string _password;
+    public string Message { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await StateProvider.GetAuthenticationStateAsync();
+        if (state.User.IsAuthenticated())
+            NavigationManager.NavigateTo("/");
+    }
+
+    private async Task OnLoginButton_Clicked(MouseEventArgs obj)
+    {
+        var result = await _userService.CheckPasswordAsync(_username, _password);
+        if (result is null)
+        {
+            NavigationManager.NavigateTo("/"); // TODO
+            return;
+        }
+
+        if (result.IsValid)
+        {
+            await StateProvider.SetAuthenticationStateAsync(result.Result);
+            NavigationManager.NavigateTo("/");
+            return;
+        }
+        
+        InvalidCredentials(result.Errors!);
+    }
+
+    private void InvalidCredentials(IEnumerable<string> errors)
+    {
+        Message = string.Join('\n', errors);
+        StateHasChanged();
+    }
+}
