@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package grpcPost;
+
+service GrpcPost {
+  rpc CreatePost (CreatePostRequest) returns (CreatePostResponse);
+  rpc GetPost (GetPostRequest) returns (GetPostResponse);
+  rpc UpdatePost (UpdatePostRequest) returns (UpdatePostResponse);
+  rpc DeletePost (DeletePostRequest) returns (DeletePostResponse);
+}
+
+//Api response containing information about the state of the data in the responses
+message GrpcApiResponse {
+  string message = 1;
+  repeated string errors = 2;
+  bool isValid = 3;
+}
+
+//--------------Create post-----------------
+message CreatePostRequest {
+  string title = 1;
+  string content = 2;
+  bool isVisible = 3;
+}
+
+message CreatePostResponse {
+  GrpcApiResponse apiResponse = 1;
+  int32 result = 2;
+}
+
+//--------------Read post-----------------
+message GetPostRequest {
+  int32 id = 1;
+}
+
+message GrpcPostView {
+  int32 id = 1;
+  string owner = 2;
+  string title = 3;
+  string content = 4;
+  string createdOn = 5;
+  string updatedOn = 6;
+  bool isVisible = 7;
+}
+
+message GetPostResponse {
+  GrpcApiResponse apiResponse = 1;
+  GrpcPostView postView = 2;
+}
+
+//--------------Update post-----------------
+message UpdatePostRequest {
+  int32 id = 1;
+  string title = 2;
+  string content = 3;
+  bool isVisible = 4;
+}
+
+message UpdatePostResponse {
+  GrpcApiResponse apiResponse = 1;
+  GrpcPostView postView = 2;
+}
+
+
+//--------------Delete post-----------------
+
+message DeletePostRequest { 
+  int32 id = 1;
+}
+
+message DeletePostResponse {
+  GrpcApiResponse apiResponse = 1;
+}
+

@@ -14,4 +14,21 @@ services:
       - 5000:80
       - 5001:443
     depends_on:
-      - mssql
+      - user-mssql
+  
+  posts-mssql:
+    image: mcr.microsoft.com/mssql/server
+    restart: always
+    environment:
+      SA_PASSWORD: Tagesdosis123
+      ACCEPT_EULA: "Y" # Add Persistence
+    ports:
+      - 1434:1433
+
+  posts-srv:
+    image: ${DOCKER_REGISTRY-}tagesdosis-posts
+    ports:
+      - 5002:80
+      - 5003:443
+    depends_on:
+      - posts-mssql

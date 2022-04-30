@@ -6,5 +6,6 @@ public interface IPostRepository
 {
     public Task<int> SavePostAsync(Post post);
     Task DeletePostAsync(int requestId);
-    Task<Post> FindByIdAsync(int id);
+    Task<Post?> FindByIdAsync(int id);
+    Task<Post> UpdateAsync(Post post);
 }
