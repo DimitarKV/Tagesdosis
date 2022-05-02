@@ -13,12 +13,11 @@ public class PostRepository : IPostRepository
         _context = context;
     }
 
-    public async Task<int> SavePostAsync(Post post)
+    public async Task<Post> SavePostAsync(Post post)
     {
-        var entry = _context.Posts!.Add(post);
+        var result = _context.Posts!.Add(post);
         await _context.SaveChangesAsync();
-
-        return entry.Entity.Id;
+        return result.Entity;
     }
 
     public async Task<Post?> FindByIdAsync(int id)
