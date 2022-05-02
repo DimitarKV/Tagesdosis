@@ -1,6 +1,11 @@
+using Azure.Messaging.ServiceBus;
 using Tagesdosis.Application;
 using Tagesdosis.Application.Extensions;
-using Tagesdosis.Infrastructure.ProtectedStorage.AzureKeyVault;
+using Tagesdosis.Application.Infrastructure.MessageBrokers;
+using Tagesdosis.Infrastructure.MessageBrokers;
+
+using Tagesdosis.Infrastructure.MessageBrokers.AzureServiceBus;
+using Tagesdosis.Infrastructure.MessageBrokers.Extensions;
 using Tagesdosis.Services.User.Data.Entities;
 using Tagesdosis.Services.User.Extensions;
 using Tagesdosis.Services.User.Identity;
@@ -18,6 +23,12 @@ builder.AddPersistence();
 // MediatR and FluentValidation pipeline configuration
 builder.Services.AddApplication(new [] {typeof(AppUser).Assembly});
 builder.Services.AddTransient<IIdentityService, IdentityService>();
+builder.AddAzureServiceBusSenders(typeof(AppUser).Assembly);
+builder.Services.AddTransient<IMessageSenderFactory, MessageSenderFactory>(provider =>
+{
+    var resolver = provider.GetService<AzureServiceBusSenderResolver>()!;
+    return new MessageSenderFactory(resolver);
+});
 
 // Identity and security
 builder.Services.AddIdentity();
@@ -30,6 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 /*if (builder.Environment.IsProduction())
 {
     builder.AddAzureKeyVault(new AzureKeyVaultOptions

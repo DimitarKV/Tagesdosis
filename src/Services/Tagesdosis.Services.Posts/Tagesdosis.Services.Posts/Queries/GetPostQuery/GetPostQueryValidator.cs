@@ -25,7 +25,7 @@ public class GetPostQueryValidator : AbstractValidator<GetPostQuery>
                 var post = await postRepository.FindByIdAsync(q.Id);
                 if (post is null)
                     return true;
-                if (!post.IsVisible && post.UserName != q.UserName)
+                if (!post.IsVisible && post.Author.UserName != q.UserName)
                     return false;
                 return true;
             })

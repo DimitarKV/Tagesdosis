@@ -31,6 +31,8 @@ public static class SecurityExtensions
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = configuration["Jwt:Issuer"],
                 ValidAudience = configuration["Jwt:Audience"],
+                //TODO remove in production!!!
+                ClockSkew = TimeSpan.FromDays(28),
                 IssuerSigningKey = new SymmetricSecurityKey
                     (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
             };
