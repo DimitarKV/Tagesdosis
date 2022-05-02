@@ -1,4 +1,5 @@
-﻿using Tagesdosis.Services.Posts.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Tagesdosis.Services.Posts.Data.Entities;
 using Tagesdosis.Services.Posts.Data.Persistence.Interfaces;
 using Tagesdosis.Services.Posts.Data.Repositories.Interfaces;
 
@@ -22,7 +23,7 @@ public class PostRepository : IPostRepository
 
     public async Task<Post?> FindByIdAsync(int id)
     {
-        var post = await _context.Posts!.FindAsync(id);
+        var post = await _context.Posts!.Include(p => p.Author).Where(p => p.Id == id).FirstOrDefaultAsync();
         return post;
     }
 
