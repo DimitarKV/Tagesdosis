@@ -30,21 +30,26 @@ public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, ApiRe
 {
     private IPostRepository _repository;
     private IMapper _mapper;
+    private readonly IAuthorRepository _authorRepository;
 
-    public CreatePostCommandHandler(IPostRepository repository, IMapper mapper)
+    public CreatePostCommandHandler(IPostRepository repository, IMapper mapper, IAuthorRepository authorRepository)
     {
         _repository = repository;
         _mapper = mapper;
+        _authorRepository = authorRepository;
     }
 
     public async Task<ApiResponse<int>> Handle(CreatePostCommand request, CancellationToken cancellationToken)
     {
         var post = _mapper.Map<Post>(request);
+        
         post.CreatedOn = DateTime.Now;
         post.UpdatedOn = DateTime.Now;
 
-        var id = await _repository.SavePostAsync(post);
+        post = await _repository.SavePostAsync(post);
+        post.Author = await _authorRepository.FindByUsernameAsync(request.UserName);
+        post = await _repository.UpdateAsync(post);
         
-        return new ApiResponse<int>(id, "Successfully created post!");
+        return new ApiResponse<int>(post.Id, "Successfully created post!");
     }
 }

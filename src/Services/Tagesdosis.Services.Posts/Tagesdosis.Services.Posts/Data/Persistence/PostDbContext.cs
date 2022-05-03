@@ -18,4 +18,11 @@ public class PostDbContext : DbContext, IPostDbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Author>()
+            .HasIndex(a => a.UserName)
+            .IsUnique();
+        
+    }
 }
