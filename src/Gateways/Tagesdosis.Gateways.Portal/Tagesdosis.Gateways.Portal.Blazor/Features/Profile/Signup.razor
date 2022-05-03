@@ -3,38 +3,39 @@
 @inject IUserService _userService
 
 <div class="container-fluid">
-  <div class="row mh-100vh">
-    <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch p-5 rounded rounded-lg-0 my-5 my-lg-0 box-style" id="login-block">
-      <div class="m-auto w-lg-75 w-xl-50">
-        <h2 class="fw-light mb-5 intro-text">
-          <img class="logo">&nbsp; <strong>
-            <em>Tagesdosis</em>
-          </strong>
-        </h2>
-        <form>
-          <div class="form-group mb-3">
-            <label class="form-label text-secondary">Email</label>
-            <input class="form-control" type="text" required="" inputmode="email" @bind="_email">
-            <label class="form-label text-secondary">Username</label>
-            <input class="form-control" type="text" required="" inputmode="email" @bind="_userName">
-          </div>
-          <div class="form-group mb-3">
-            <label class="form-label text-secondary">Password</label>
-            <input class="form-control" type="password" required="" @bind="_password">
-          </div>
-          <button class="btn btn-info mt-2 btn-style" type="submit" @onclick="OnSignUpButton_Clicked">Sign up</button>
-        </form>
-        <p class="mt-3 mb-0">
-          <a class="info-text small" href="#">Already have an account? Log in here!</a>
-        </p>
-        <p class="mt-3 mb-0">
-          @_message
-        </p>
-        
-      </div>
+    <div class="row mh-100vh">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch p-5 rounded rounded-lg-0 my-5 my-lg-0 box-style" id="login-block">
+            <div class="m-auto w-lg-75 w-xl-50">
+                <h2 class="fw-light mb-5 intro-text">
+                    <img class="logo">&nbsp;
+                    <strong>
+                        <em>Tagesdosis</em>
+                    </strong>
+                </h2>
+                <form>
+                    <div class="form-group mb-3">
+                        <label class="form-label text-secondary">Email</label>
+                        <input class="form-control" type="text" required="" inputmode="email" @bind="_email">
+                        <label class="form-label text-secondary">Username</label>
+                        <input class="form-control" type="text" required="" inputmode="email" @bind="_userName">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label text-secondary">Password</label>
+                        <input class="form-control" type="password" required="" @bind="_password">
+                    </div>
+                    <button class="btn btn-info mt-2 btn-style" type="submit" @onclick="OnSignUpButton_Clicked">Sign up</button>
+                </form>
+                <p class="mt-3 mb-0">
+                    <a class="info-text small" href="#">Already have an account? Log in here!</a>
+                </p>
+                <p class="mt-3 mb-0">
+                    @_message
+                </p>
+
+            </div>
+        </div>
+        <Background/>
     </div>
-    <Background/>
-  </div>
 </div>
 
 @code {
@@ -47,6 +48,8 @@
     private async Task OnSignUpButton_Clicked(MouseEventArgs obj)
     {
         var result = await _userService.CreateAsync(_userName, _email, _password);
+        if(!result.IsValid)
+        {}
         _message = result.Message;
         StateHasChanged();
     }
