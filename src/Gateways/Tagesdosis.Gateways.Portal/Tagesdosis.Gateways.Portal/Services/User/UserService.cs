@@ -23,9 +23,8 @@ public class UserService : IUserService
         var credentials = new UserCredentials(userName, email, password);
         var json = JsonSerializer.Serialize(credentials);
         
-        request.Content = JsonContent.Create(json);
+        request.Content = new StringContent(json);
         request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-        
         var response = await _httpClient.SendAsync(request);
 
         var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse>();
