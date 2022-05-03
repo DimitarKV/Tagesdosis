@@ -1,6 +1,9 @@
 @page "/profile/signup"
 @using Tagesdosis.Gateways.Portal.Services.User
+@using Tagesdosis.Gateways.Portal.Blazor.Providers
+@inject NavigationManager NavigationManager
 @inject IUserService _userService
+@inject TokenAuthenticationStateProvider StateProvider
 
 <div class="container-fluid">
     <div class="row mh-100vh">
@@ -23,13 +26,13 @@
                         <label class="form-label text-secondary">Password</label>
                         <input class="form-control" type="password" required="" @bind="_password">
                     </div>
-                    <button class="btn btn-info mt-2 btn-style" type="submit" @onclick="OnSignUpButton_Clicked">Sign up</button>
                 </form>
+                <button class="btn btn-info mt-2 btn-style" @onclick="OnSignUpButton_Clicked">Sign up</button>
                 <p class="mt-3 mb-0">
                     <a class="info-text small" href="#">Already have an account? Log in here!</a>
                 </p>
-                <p class="mt-3 mb-0">
-                    @_message
+                <p class="mt-3 mb-0 error-text">
+                    @Message
                 </p>
 
             </div>
@@ -43,14 +46,31 @@
     private string _userName;
     private string _email;
     private string _password;
-    private string _message;
+    public string Message { get; set; }
+    private List<string> _errors = new List<string>();
 
     private async Task OnSignUpButton_Clicked(MouseEventArgs obj)
     {
         var result = await _userService.CreateAsync(_userName, _email, _password);
-        if(!result.IsValid)
-        {}
-        _message = result.Message;
+
+        if (!result.IsValid)
+            Error(result.Errors);
+        else
+        {
+            var token = await _userService.CheckPasswordAsync(_userName, _password);
+            if (token.IsValid)
+            {
+                await StateProvider.SetAuthenticationStateAsync(token.Result);
+                NavigationManager.NavigateTo("/");
+                return;
+            }
+            Error(new[] {"An error occured while trying to log in, please log in manually!"});
+        }
+    }
+
+    private void Error(IEnumerable<string> errors)
+    {
+        Message = string.Join('\n', errors);
         StateHasChanged();
     }
 

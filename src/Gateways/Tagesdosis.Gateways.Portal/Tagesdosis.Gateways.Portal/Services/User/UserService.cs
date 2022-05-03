@@ -28,7 +28,7 @@ public class UserService : IUserService
         var response = await _httpClient.SendAsync(request);
 
         var apiResponse = await response.Content.ReadFromJsonAsync<ApiResponse>();
-        
+
         return apiResponse;
     }
 
