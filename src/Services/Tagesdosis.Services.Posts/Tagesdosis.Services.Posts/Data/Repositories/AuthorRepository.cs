@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Tagesdosis.Services.Posts.Data.Entities;
 using Tagesdosis.Services.Posts.Data.Persistence;
 using Tagesdosis.Services.Posts.Data.Persistence.Interfaces;
@@ -24,8 +25,8 @@ public class AuthorRepository : IAuthorRepository
 
     public async Task<Author?> FindByIdAsync(int id)
     {
-        var post = await _context.Authors!.FindAsync(id);
-        return post;
+        var author = await _context.Authors!.FindAsync(id);
+        return author;
     }
 
     public async Task<Author> UpdateAsync(Author author)
@@ -33,6 +34,14 @@ public class AuthorRepository : IAuthorRepository
         author = _context.Authors!.Update(author).Entity;
         await _context.SaveChangesAsync();
         return author;
+    }
+
+    public Task<Author> FindByUsernameAsync(string userName)
+    {
+        var author = from a in _context.Authors
+            where a.UserName == userName
+            select a;
+        return author.Include(a => a.Posts).FirstOrDefaultAsync()!;
     }
 
     public async Task DeleteAuthorAsync(int id)

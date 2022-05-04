@@ -56,6 +56,7 @@
 @code {
     private string _username;
     private string _password;
+    private List<string> _errors = new List<string>();
     public string Message { get; set; }
 
     private async Task OnLoginButton_Clicked(MouseEventArgs obj)
@@ -63,7 +64,8 @@
         var result = await _userService.CheckPasswordAsync(_username, _password);
         if (result is null)
         {
-            NavigationManager.NavigateTo("/"); // TODO
+            _errors.Clear();
+            _errors.Add("Error!");
             return;
         }
 

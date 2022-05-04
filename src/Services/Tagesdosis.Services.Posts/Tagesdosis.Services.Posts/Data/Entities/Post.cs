@@ -8,5 +8,5 @@ public class Post : Entity<int>
     public string Content { get; set; }
     public bool IsVisible { get; set; }
 
-    public Author Author { get; set; }
+    public Author? Author { get; set; }
 }
