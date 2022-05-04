@@ -1,5 +1,6 @@
-﻿using Tagesdosis.Services.Posts.Data.Entities;
-using Tagesdosis.Services.Posts.Data.Persistance.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Tagesdosis.Services.Posts.Data.Entities;
+using Tagesdosis.Services.Posts.Data.Persistence.Interfaces;
 using Tagesdosis.Services.Posts.Data.Repositories.Interfaces;
 
 namespace Tagesdosis.Services.Posts.Data.Repositories;
@@ -13,23 +14,29 @@ public class PostRepository : IPostRepository
         _context = context;
     }
 
-    public async Task<int> SavePostAsync(Post post)
+    public async Task<Post> SavePostAsync(Post post)
     {
-        var entry = _context.Posts!.Add(post);
+        var result = _context.Posts!.Add(post);
         await _context.SaveChangesAsync();
-
-        return entry.Entity.Id;
+        return result.Entity;
     }
 
-    public async Task<Post> FindByIdAsync(int id)
+    public async Task<Post?> FindByIdAsync(int id)
     {
-        Post post = await _context.Posts!.FindAsync(id);
+        var post = await _context.Posts!.Include(p => p.Author).Where(p => p.Id == id).FirstOrDefaultAsync();
+        return post;
+    }
+
+    public async Task<Post> UpdateAsync(Post post)
+    {
+        post = _context.Posts!.Update(post).Entity;
+        await _context.SaveChangesAsync();
         return post;
     }
 
     public async Task DeletePostAsync(int id)
     {
-        _context.Posts.Remove(await FindByIdAsync(id));
-        _context.SaveChanges();
+        _context.Posts!.Remove((await FindByIdAsync(id))!);
+        await _context.SaveChangesAsync();
     }
 }

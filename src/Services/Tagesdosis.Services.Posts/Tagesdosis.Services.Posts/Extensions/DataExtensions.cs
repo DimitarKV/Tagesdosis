@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Tagesdosis.Services.Posts.Data.Persistance;
+using Tagesdosis.Services.Posts.Data.Persistence;
 
 namespace Tagesdosis.Services.Posts.Extensions;
 

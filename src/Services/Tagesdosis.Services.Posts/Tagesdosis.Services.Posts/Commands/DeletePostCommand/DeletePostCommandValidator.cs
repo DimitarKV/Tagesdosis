@@ -6,7 +6,6 @@ namespace Tagesdosis.Services.Posts.Commands.DeletePostCommand;
 
 public class DeletePostCommandValidator : AbstractValidator<DeletePostCommand>
 {
-    
     public DeletePostCommandValidator(IPostRepository postRepository)
     {
         RuleFor(c => c.Id)
@@ -20,7 +19,7 @@ public class DeletePostCommandValidator : AbstractValidator<DeletePostCommand>
                 var post = await postRepository.FindByIdAsync(cmd.Id);
                 if (post is null)
                     return true;
-                return post.UserName == cmd.UserName;
+                return post.Author.UserName == cmd.UserName;
             })
             .WithErrorCode("403")
             .WithMessage("The specified post is not owned by the specified user!");

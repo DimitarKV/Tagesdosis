@@ -31,6 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Tagesdosis.Application\Tagesdosis.Application.csproj" />
       <ProjectReference Include="..\..\..\Common\Tagesdosis.Domain\Tagesdosis.Domain.csproj" />
     </ItemGroup>
 
