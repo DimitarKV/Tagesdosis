@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using System.Text.Json;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Tagesdosis.Gateways.Portal.Blazor.Extensions;
 
@@ -9,7 +10,7 @@ public static class AuthenticationExtensions
     {
         return principal.Identity is not null && principal.Identity.IsAuthenticated;
     }
-    
+
     public static IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
     {
         var payload = jwt.Split('.')[1];

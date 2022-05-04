@@ -1,4 +1,4 @@
-namespace Tagesdosis.Gateways.Portal.Services.User.Models;
+namespace Tagesdosis.Gateways.Portal.Data.Models.User;
 
 public class UserCredentials
 {

@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
@@ -39,7 +40,7 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
         return new AuthenticationState(new ClaimsPrincipal(identity));
     }
 
-    private async Task<string?> GetTokenAsync()
+    public async Task<string?> GetTokenAsync()
     {
         var result = await _sessionStorage.GetAsync<string>(StorageKey);
         return result.Value;
