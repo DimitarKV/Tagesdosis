@@ -1,11 +1,10 @@
 @page "/post/create"
 @using System.ComponentModel.DataAnnotations
-@using Tagesdosis.Gateways.Portal.Blazor.Providers
+@using Tagesdosis.Gateways.Portal.Providers
 @using Tagesdosis.Gateways.Portal.Services.Post.Interfaces
 
 @inject IPostService _postService
 @inject NavigationManager NavigationManager
-@inject TokenAuthenticationStateProvider StateProvider
 
 <AuthorizeView>
     <NotAuthorized>
@@ -83,7 +82,7 @@
 
     private async void HandleFormSubmit()
     {
-        var result = await _postService.CreatePostAsync(DataModel.Title!, DataModel.Content!, await StateProvider.GetTokenAsync());
+        var result = await _postService.CreatePostAsync(DataModel.Title!, DataModel.Content!);
 
         if (result.IsValid)
         {

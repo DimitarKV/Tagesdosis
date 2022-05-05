@@ -1,11 +1,9 @@
-using System.Net.Http.Headers;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using Microsoft.JSInterop;
 using Tagesdosis.Gateways.Portal.Blazor.Extensions;
 
-namespace Tagesdosis.Gateways.Portal.Blazor.Providers;
+namespace Tagesdosis.Gateways.Portal.Providers;
 
 public class TokenAuthenticationStateProvider : AuthenticationStateProvider
 {

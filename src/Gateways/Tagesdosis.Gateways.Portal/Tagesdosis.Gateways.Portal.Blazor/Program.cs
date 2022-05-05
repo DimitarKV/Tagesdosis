@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components.Authorization;
-using Tagesdosis.Gateways.Portal.Blazor.Providers;
+using Tagesdosis.Gateways.Portal.Providers;
 using Tagesdosis.Gateways.Portal.Services.Post;
 using Tagesdosis.Gateways.Portal.Services.Post.Interfaces;
 using Tagesdosis.Gateways.Portal.Services.User;
