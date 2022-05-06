@@ -2,28 +2,12 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-using Tagesdosis.Application.Infrastructure.ServiceConsumers;
 using Tagesdosis.Domain.Types;
 using Tagesdosis.Gateways.Portal.Data.Models.User;
 using Tagesdosis.Gateways.Portal.Services.User.Services.Interfaces;
 using Tagesdosis.Gateways.Portal.Static;
 
 namespace Tagesdosis.Gateways.Portal.Services.User;
-
-public class CreateUserModel
-{
-    public string UserName { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
-
-[BaseUrl("Services:User:Client", LoadFromConfiguration = true)]
-public partial class UserServiceConsumer : IServiceConsumer
-{
-    [Action("/api/user", "POST")]
-    [ContentType("application/json")]
-    public partial ApiResponse CreateUser(CreateUserModel model);
-}
 
 public class UserService : IUserService
 {

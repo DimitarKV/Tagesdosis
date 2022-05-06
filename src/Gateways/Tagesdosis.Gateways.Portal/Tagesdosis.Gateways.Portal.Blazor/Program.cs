@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components.Authorization;
+using Tagesdosis.Application.Infrastructure.ServiceConsumers;
 using Tagesdosis.Gateways.Portal.Providers;
 using Tagesdosis.Gateways.Portal.Services.Post;
 using Tagesdosis.Gateways.Portal.Services.Post.Interfaces;
@@ -14,6 +15,7 @@ builder.Services.AddAuthentication();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<UserServiceConsumer>();
 builder.Services.AddScoped<TokenAuthenticationStateProvider, TokenAuthenticationStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider, TokenAuthenticationStateProvider>();
 

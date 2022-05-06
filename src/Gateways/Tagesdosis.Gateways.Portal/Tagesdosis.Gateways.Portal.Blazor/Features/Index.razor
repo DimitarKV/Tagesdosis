@@ -1,5 +1,21 @@
 @page "/"
+@using Tagesdosis.Gateways.Portal.Services.User
+@inject UserServiceConsumer Consumer
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        var model = new CreateUserModel
+        {
+            UserName = "lalal",
+            Email = "eey@mail.com",
+            Password = "#Password123"
+        };
+        var response = await Consumer.CreateUser(model);
+    }
+}
