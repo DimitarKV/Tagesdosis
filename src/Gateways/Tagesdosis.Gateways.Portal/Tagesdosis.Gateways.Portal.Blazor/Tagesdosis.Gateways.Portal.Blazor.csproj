@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\Tagesdosis.Application.Consumers\Tagesdosis.Application.Consumers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
       <ProjectReference Include="..\Tagesdosis.Gateways.Portal\Tagesdosis.Gateways.Portal.csproj" />
     </ItemGroup>
 

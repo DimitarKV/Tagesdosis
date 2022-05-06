@@ -18,17 +18,13 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
     public async Task SetAuthenticationStateAsync(string? token)
     {
         if (token is null)
-        {
             await _sessionStorage.DeleteAsync(StorageKey);
-        }
         else
-        {
             await _sessionStorage.SetAsync(StorageKey, token);
-        }
-        
+
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
     }
-    
+
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         var token = await GetTokenAsync();
