@@ -1,10 +1,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using Microsoft.JSInterop;
 using Tagesdosis.Gateways.Portal.Blazor.Extensions;
 
-namespace Tagesdosis.Gateways.Portal.Blazor.Providers;
+namespace Tagesdosis.Gateways.Portal.Providers;
 
 public class TokenAuthenticationStateProvider : AuthenticationStateProvider
 {
@@ -39,7 +38,7 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
         return new AuthenticationState(new ClaimsPrincipal(identity));
     }
 
-    private async Task<string?> GetTokenAsync()
+    public async Task<string?> GetTokenAsync()
     {
         var result = await _sessionStorage.GetAsync<string>(StorageKey);
         return result.Value;

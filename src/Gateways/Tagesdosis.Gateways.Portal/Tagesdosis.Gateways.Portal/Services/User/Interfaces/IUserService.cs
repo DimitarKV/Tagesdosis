@@ -1,6 +1,6 @@
 using Tagesdosis.Domain.Types;
 
-namespace Tagesdosis.Gateways.Portal.Services.User;
+namespace Tagesdosis.Gateways.Portal.Services.User.Services.Interfaces;
 
 public interface IUserService
 {

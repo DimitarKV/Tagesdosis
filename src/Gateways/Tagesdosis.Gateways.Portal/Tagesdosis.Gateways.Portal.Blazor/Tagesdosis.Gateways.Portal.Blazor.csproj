@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Components" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="Features\Account\Login\Index.razor" />
       <_ContentIncludedByDefault Remove="wwwroot\css\img\DarkBackground.jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\css\img\DarkLogo.png" />
@@ -19,6 +15,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Tagesdosis.Gateways.Portal\Tagesdosis.Gateways.Portal.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\Post\Components" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,11 @@
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Tagesdosis.Domain.Types;
-using Tagesdosis.Gateways.Portal.Services.User.Models;
+using Tagesdosis.Gateways.Portal.Data.Models.User;
+using Tagesdosis.Gateways.Portal.Services.User.Services.Interfaces;
+using Tagesdosis.Gateways.Portal.Static;
 
 namespace Tagesdosis.Gateways.Portal.Services.User;
 

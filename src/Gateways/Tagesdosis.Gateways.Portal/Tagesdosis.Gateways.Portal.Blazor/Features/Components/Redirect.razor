@@ -1,0 +1,15 @@
+@attribute [AllowAnonymous]
+@inject NavigationManager _navigationManager
+
+
+@code {
+
+    [Parameter]
+    public string Url { get; set; }
+    
+    protected override void OnInitialized()
+    {
+        _navigationManager.NavigateTo(Url);
+    }
+
+}

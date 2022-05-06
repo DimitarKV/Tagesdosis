@@ -1,64 +1,89 @@
 @page "/profile/signup"
 @using Tagesdosis.Gateways.Portal.Services.User
-@using Tagesdosis.Gateways.Portal.Blazor.Providers
+@using System.ComponentModel.DataAnnotations
+@using Tagesdosis.Gateways.Portal.Providers
+@using Tagesdosis.Gateways.Portal.Services.User.Services.Interfaces
 @inject NavigationManager NavigationManager
 @inject IUserService _userService
 @inject TokenAuthenticationStateProvider StateProvider
 
-<div class="container-fluid">
-    <div class="row mh-100vh">
-        <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch p-5 rounded rounded-lg-0 my-5 my-lg-0 box-style" id="login-block">
-            <div class="m-auto w-lg-75 w-xl-50">
-                <h2 class="fw-light mb-5 intro-text">
-                    <img class="logo">&nbsp;
-                    <strong>
-                        <em>Tagesdosis</em>
-                    </strong>
-                </h2>
-                <form>
-                    <div class="form-group mb-3">
-                        <label class="form-label text-secondary">Email</label>
-                        <input class="form-control" type="text" required="" inputmode="email" @bind="_email">
-                        <label class="form-label text-secondary">Username</label>
-                        <input class="form-control" type="text" required="" inputmode="email" @bind="_userName">
+<AuthorizeView>
+    <Authorized>
+        <Redirect Url="/"/>
+    </Authorized>
+    
+    <NotAuthorized>
+        <div class="container-fluid">
+            <div class="row mh-100vh">
+                <div class="col-10 col-sm-8 col-md-6 col-lg-6 offset-1 offset-sm-2 offset-md-3 offset-lg-0 align-self-center d-lg-flex align-items-lg-center align-self-lg-stretch p-5 rounded rounded-lg-0 my-5 my-lg-0 box-style" id="login-block">
+                    <div class="m-auto w-lg-75 w-xl-50">
+                        <h2 class="fw-light mb-5 intro-text">
+                            <img class="logo">&nbsp;
+                            <strong>
+                                <em>Tagesdosis</em>
+                            </strong>
+                        </h2>
+                        <EditForm Context="RegisterFormContext" Model="@DataModel" OnValidSubmit="@HandleFormSubmitAsync">
+                            <DataAnnotationsValidator/>
+                            <ValidationSummary/>
+                            <p class="mt-3 mb-0 error-text">
+                                @Message
+                            </p>
+        
+                            <div class="form-group mb-3">
+                                <label class="form-label text-secondary">Email</label>
+                                <InputText class="form-control" id="email" @bind-Value="DataModel.Email"/>
+                                <label class="form-label text-secondary">Username</label>
+                                <InputText class="form-control" id="username" @bind-Value="DataModel.Username"/>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="form-label text-secondary">Password</label>
+                                <InputText class="form-control" type="password" id="password" @bind-Value="DataModel.Password"/>
+                            </div>
+                            <button class="btn btn-info mt-2 btn-style" type="submit">Sign up</button>
+                        </EditForm>
+        
+        
+                        <p class="mt-3 mb-0">
+                            <a class="info-text small" href="#">Already have an account? Log in here!</a>
+                        </p>
+        
                     </div>
-                    <div class="form-group mb-3">
-                        <label class="form-label text-secondary">Password</label>
-                        <input class="form-control" type="password" required="" @bind="_password">
-                    </div>
-                </form>
-                <button class="btn btn-info mt-2 btn-style" @onclick="OnSignUpButton_Clicked">Sign up</button>
-                <p class="mt-3 mb-0">
-                    <a class="info-text small" href="#">Already have an account? Log in here!</a>
-                </p>
-                <p class="mt-3 mb-0 error-text">
-                    @Message
-                </p>
-
+                </div>
+                <Background/>
             </div>
         </div>
-        <Background/>
-    </div>
-</div>
+    </NotAuthorized>
+</AuthorizeView>
+
 
 @code {
 
-    private string _userName;
-    private string _email;
-    private string _password;
-    public string Message { get; set; }
-    private List<string> _errors = new List<string>();
-
-    private async Task OnSignUpButton_Clicked(MouseEventArgs obj)
+    public class FormData
     {
-        var result = await _userService.CreateAsync(_userName, _email, _password);
+        [Required]
+        public string? Email { get; set; }
 
-        if (!result.IsValid)
-            Error(result.Errors);
+        [Required]
+        public string? Username { get; set; }
+
+        [Required]
+        public string? Password { get; set; }
+    }
+
+    private FormData DataModel = new FormData();
+    public string Message { get; set; }
+
+    private async void HandleFormSubmitAsync()
+    {
+        var result = await _userService.CreateAsync(DataModel.Username!, DataModel.Email!, DataModel.Password!);
+
+        if (!result!.IsValid)
+            Error(result.Errors!);
         else
         {
-            var token = await _userService.CheckPasswordAsync(_userName, _password);
-            if (token.IsValid)
+            var token = await _userService.CheckPasswordAsync(DataModel.Username!, DataModel.Password!);
+            if (token!.IsValid)
             {
                 await StateProvider.SetAuthenticationStateAsync(token.Result);
                 NavigationManager.NavigateTo("/");
