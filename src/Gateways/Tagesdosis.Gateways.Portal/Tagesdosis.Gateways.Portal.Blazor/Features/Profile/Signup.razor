@@ -2,9 +2,8 @@
 @using Tagesdosis.Gateways.Portal.Services.User
 @using System.ComponentModel.DataAnnotations
 @using Tagesdosis.Gateways.Portal.Providers
-@using Tagesdosis.Gateways.Portal.Services.User.Services.Interfaces
 @inject NavigationManager NavigationManager
-@inject IUserService _userService
+@inject UserServiceConsumer _userServiceConsumer
 @inject TokenAuthenticationStateProvider StateProvider
 
 <AuthorizeView>
@@ -76,13 +75,22 @@
 
     private async void HandleFormSubmitAsync()
     {
-        var result = await _userService.CreateAsync(DataModel.Username!, DataModel.Email!, DataModel.Password!);
+        var result = await _userServiceConsumer.CreateAsync(new CreateUserModel
+        {
+            UserName = DataModel.Username,
+            Email = DataModel.Email,
+            Password = DataModel.Password
+        });
 
         if (!result!.IsValid)
             Error(result.Errors!);
         else
         {
-            var token = await _userService.CheckPasswordAsync(DataModel.Username!, DataModel.Password!);
+            var token = await _userServiceConsumer.CheckPasswordAsync(new CheckPasswordModel
+            {
+                UserName = DataModel.Username,
+                Password = DataModel.Password
+            });
             if (token!.IsValid)
             {
                 await StateProvider.SetAuthenticationStateAsync(token.Result);

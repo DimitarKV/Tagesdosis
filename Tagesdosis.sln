@@ -48,7 +48,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Gateways.Portal"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Gateways.Portal.Blazor", "src\Gateways\Tagesdosis.Gateways.Portal\Tagesdosis.Gateways.Portal.Blazor\Tagesdosis.Gateways.Portal.Blazor.csproj", "{D51563D4-B262-4BE1-959F-88EEF213FAC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Application.Consumers", "src\Common\Tagesdosis.Application.Consumers\Tagesdosis.Application.Consumers.csproj", "{F9D7BBFA-9757-4E2C-A928-02C41282B907}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagesdosis.Application.Generators", "src\Common\Tagesdosis.Application.Generators\Tagesdosis.Application.Generators.csproj", "{F9D7BBFA-9757-4E2C-A928-02C41282B907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

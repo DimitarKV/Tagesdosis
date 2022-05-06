@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Components.Authorization;
-using Tagesdosis.Application.Infrastructure.ServiceConsumers;
 using Tagesdosis.Gateways.Portal.Providers;
 using Tagesdosis.Gateways.Portal.Services.Post;
 using Tagesdosis.Gateways.Portal.Services.Post.Interfaces;
 using Tagesdosis.Gateways.Portal.Services.User;
-using Tagesdosis.Gateways.Portal.Services.User.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +11,6 @@ builder.Services.AddRazorPages(opt => opt.RootDirectory = "/Features");
 builder.Services.AddServerSideBlazor();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<UserServiceConsumer>();
 builder.Services.AddScoped<TokenAuthenticationStateProvider, TokenAuthenticationStateProvider>();

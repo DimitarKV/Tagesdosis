@@ -1,8 +1,8 @@
 @page "/profile/login"
 @using System.ComponentModel.DataAnnotations
 @using Tagesdosis.Gateways.Portal.Providers
-@using Tagesdosis.Gateways.Portal.Services.User.Services.Interfaces
-@inject IUserService _userService
+@using Tagesdosis.Gateways.Portal.Services.User
+@inject UserServiceConsumer _userServiceConsumer
 @inject NavigationManager NavigationManager
 @inject TokenAuthenticationStateProvider StateProvider
 
@@ -75,7 +75,11 @@
 
     public async void HandleFormSubmit()
     {
-        var result = await _userService.CheckPasswordAsync(DataModel.Username!, DataModel.Password!);
+        var result = await _userServiceConsumer.CheckPasswordAsync(new CheckPasswordModel
+        {
+            UserName = DataModel.Username,
+            Password = DataModel.Password
+        });
 
         if (result!.IsValid)
         {

@@ -8,14 +8,4 @@
 
 @code
 {
-    protected override async Task OnInitializedAsync()
-    {
-        var model = new CreateUserModel
-        {
-            UserName = "lalal",
-            Email = "eey@mail.com",
-            Password = "#Password123"
-        };
-        var response = await Consumer.CreateUser(model);
-    }
 }
