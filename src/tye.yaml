@@ -1,8 +1,5 @@
 name: tagesdosis
 services:
-- name: tagesdosis-gateways-portal
-  project: Gateways/Tagesdosis.Gateways.Portal/Tagesdosis.Gateways.Portal.csproj
-  
 - name: tagesdosis-services-user-api
   project: Services/Tagesdosis.Services.User/Tagesdosis.Services.User.Api/Tagesdosis.Services.User.Api.csproj
   bindings:
@@ -22,3 +19,13 @@ services:
     - port: 5003
       protocol: https
       name: "tagesdosis-services-user-grpc-https"
+
+- name: tagesdosis-gateways-portal-blazor
+  project: Gateways/Tagesdosis.Gateways.Portal/Tagesdosis.Gateways.Portal.Blazor/Tagesdosis.Gateways.Portal.Blazor.csproj
+  bindings:
+    - port: 5004
+      protocol: http
+      name: "tagesdosis-gateways-portal-blazor-http"
+    - port: 5005
+      protocol: https
+      name: "tagesdosis-gateways-portal-blazor-https"

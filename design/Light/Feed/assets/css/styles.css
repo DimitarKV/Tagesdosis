@@ -1,0 +1,26 @@
+.logo {
+  max-width: 60px;
+  max-height: 60px;
+}
+
+.background {
+  background-image: url("../../assets/img/download.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+text.style {
+}
+
+.text-style {
+  color: white;
+}
+
+.text-style-1 {
+  color: slategray;
+}
+
+.small-style {
+  font-size: x-large;
+}
+

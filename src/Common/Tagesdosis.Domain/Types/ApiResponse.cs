@@ -11,6 +11,11 @@ public class ApiResponse
         Errors = errors?.ToList();
     }
 
+    public ApiResponse()
+    {
+        
+    }
+    
     public bool IsValid => (Errors == null || !Errors.Any());
 }
 
@@ -22,5 +27,10 @@ public class ApiResponse<TModel> : ApiResponse
         : base(message, errors)
     {
         Result = model;
+    }
+
+    public ApiResponse()
+    {
+        
     }
 }

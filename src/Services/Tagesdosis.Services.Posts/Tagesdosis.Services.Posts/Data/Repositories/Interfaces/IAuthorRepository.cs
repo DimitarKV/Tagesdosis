@@ -8,4 +8,5 @@ public interface IAuthorRepository
     Task DeleteAuthorAsync(int requestId);
     Task<Author?> FindByIdAsync(int id);
     Task<Author> UpdateAsync(Author author);
+    Task<Author> FindByUsernameAsync(string userName);
 }
