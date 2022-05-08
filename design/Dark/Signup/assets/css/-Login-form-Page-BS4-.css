@@ -84,3 +84,13 @@
   border-color: var(--bs-gray-dark);
 }
 
+font-size: small; color: #fff; background-color: #0d6efd; border-color: #0d6efd;.btn-style {
+}
+
+.switch-btn-style {
+  font-size: small;
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
