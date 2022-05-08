@@ -252,7 +252,7 @@ input, input:focus, input:active {
 }
 
 .background {
-  background-image: url("../../assets/img/download.jpg");
+  background-image: url("../../assets/img/DarkBackground.jpg");
   background-size: cover;
   background-position: center center;
 }
@@ -287,13 +287,25 @@ label {
   right: 0;
 }
 
-.btn-size {
-  font-size: small;
+.text-style {
+  color: rgb(255, 242, 0)!important;
+}
+
+.box-style {
+  background-color: var(--bs-dark);
+}
+
+.post-style {
+  background-color: var(--bs-gray-700);
 }
 
 .btn-style {
   color: #fff200;
   background-color: var(--bs-gray-700);
   border-color: var(--bs-gray-dark);
+}
+
+.btn-size {
+  font-size: small;
 }
 
